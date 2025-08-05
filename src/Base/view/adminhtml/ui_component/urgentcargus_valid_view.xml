@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">urgentcargus_valid_view.urgentcargus_valid_view_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Urgent\Base\Block\Adminhtml\Edit\BackButton"/>
+        </buttons>
+        <namespace>urgentcargus_valid_view</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>urgentcargus_valid_view.urgentcargus_valid_view_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="urgentcargus_valid_view_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <dataProvider class="Urgent\Base\Ui\Component\Awb\View\DataProvider" name="urgentcargus_valid_view_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="awb_no">
+        <settings>
+            <label translate="true">AWB</label>
+        </settings>
+        <field name="awb_no" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">AWB No</label>
+                <dataScope>awb_no</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="return_code" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Return Code</label>
+                <dataScope>return_code</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="return_awb" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Return Awb</label>
+                <dataScope>return_awb</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="order_no">
+        <settings>
+            <label translate="true">Order No</label>
+        </settings>
+        <field name="order_id" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Order ID</label>
+                <dataScope>order_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="lifting_point">
+        <settings>
+            <label translate="true">Lifting Point</label>
+        </settings>
+        <field name="lifting_point" sortOrder="10" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Lifting Point</label>
+                <dataScope>lifting_point</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Urgent\Base\Model\Config\Source\LiftingPoint"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="recipient">
+        <settings>
+            <label translate="true">Recipient</label>
+        </settings>
+        <field name="recipient_name" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Recipient Name</label>
+                <dataScope>recipient_name</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="destination_county" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Destination County</label>
+                <dataScope>destination_county</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="destination_locality" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Destination Locality</label>
+                <dataScope>destination_locality</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="destination_address" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Destination Address</label>
+                <dataScope>destination_address</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="recipient_contact" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Recipient Contact</label>
+                <dataScope>recipient_contact</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="recipient_phone" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Recipient Phone</label>
+                <dataScope>recipient_phone</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="recipient_email" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Recipient Email</label>
+                <dataScope>recipient_email</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="zip_code" sortOrder="80" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Zip Code</label>
+                <dataScope>zip_code</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="awb_details">
+        <settings>
+            <label translate="true">AWB Details</label>
+        </settings>
+        <field name="envelope" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Envelope</label>
+                <dataScope>envelope</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="parcel" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Parcel</label>
+                <dataScope>parcel</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="weight" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/weight</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Weight</label>
+                <dataScope>weight</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="length" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/length</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Length</label>
+                <dataScope>length</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="width" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/length</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Width</label>
+                <dataScope>width</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="height" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/length</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Height</label>
+                <dataScope>height</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="declared_value" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/currency</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Declared Value</label>
+                <dataScope>declared_value</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="cash_refunds" sortOrder="80" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/currency</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Cash Refunds</label>
+                <dataScope>cash_refunds</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="account_refunds" sortOrder="90" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Urgent_Base/form/element/currency</elementTmpl>
+                <dataType>text</dataType>
+                <label translate="true">Account Refunds</label>
+                <dataScope>account_refunds</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="other_repayment" sortOrder="100" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Other Repayment</label>
+                <dataScope>other_repayment</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="shipping_payer" sortOrder="110" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Shipping Payer</label>
+                <dataScope>shipping_payer</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Urgent\Base\Model\Config\Source\Payer"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="saturday_delivery" sortOrder="120" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Saturday Delivery</label>
+                <dataScope>saturday_delivery</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="morning_delivery" sortOrder="130" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Morning Delivery</label>
+                <dataScope>morning_delivery</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="package_opening" sortOrder="140" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Package Opening</label>
+                <dataScope>package_opening</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="observations" sortOrder="150" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Observations</label>
+                <dataScope>observations</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="content" sortOrder="160" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Content</label>
+                <dataScope>content</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+</form>

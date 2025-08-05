@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Urgent_Base::main" title="Urgent Cargus Config">
+                                <resource id="Urgent_Base::config_menu" title="Config">
+                                    <resource id="Urgent_Base::config" title="General"/>
+                                    <resource id="Urgent_Base::config_directory_update" title="Update Nomenclature"/>
+                                </resource>
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Urgent_Base::urgentcargus" title="Urgent Cargus Controller" sortOrder="10">
+                    <resource id="Urgent_Base::controllers" title="Constrollers" sortOrder="10">
+                        <resource id="Urgent_Base::awb_grid" title="AWB Grid" sortOrder="10"/>
+                        <resource id="Urgent_Base::awb_valid_grid" title="AWB Valid Grid" sortOrder="10"/>
+                        <resource id="Urgent_Base::awb_view" title="AWB View" sortOrder="20"/>
+                        <resource id="Urgent_Base::awb_edit" title="AWB Edit" sortOrder="30"/>
+                        <resource id="Urgent_Base::awb_validate" title="AWB Validate" sortOrder="40"/>
+                        <resource id="Urgent_Base::awb_delete" title="AWB Delete" sortOrder="50"/>
+                        <resource id="Urgent_Base::awb_valid_delete" title="AWB Valid Delete" sortOrder="60"/>
+                        <resource id="Urgent_Base::awb_valid_print" title="AWB Valid Print" sortOrder="70"/>
+                        <resource id="Urgent_Base::pickup_grid" title="Pickup Grid" sortOrder="80"/>
+                        <resource id="Urgent_Base::pickup_edit" title="Pickup New" sortOrder="90"/>
+                        <resource id="Urgent_Base::pickup_cancel" title="Pickup Cancel" sortOrder="100"/>
+                    </resource>
+                    <resource id="Urgent_Base::urgentcargus_mass_action" title="Mass Action" sortOrder="20">
+                        <resource id="Urgent_Base::urgentcargus_mass_action_add" title="Add Orders to AWB Grid" sortOrder="10"/>
+                        <resource id="Urgent_Base::awb_mass_delete" title="AWB Mass Delete" sortOrder="20"/>
+                        <resource id="Urgent_Base::awb_mass_validate" title="AWB Mass Validate" sortOrder="30"/>
+                        <resource id="Urgent_Base::awb_mass_valid_delete" title="AWB Mass Validate Delete" sortOrder="40"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

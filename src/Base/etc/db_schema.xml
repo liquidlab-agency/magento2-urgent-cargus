@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="urgent_cargus_token" resource="default" engine="innodb" comment="Urgent Cargus Token Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="token" nullable="false" length="255" comment="Token"/>
+        <column xsi:type="datetime" name="available" nullable="false" comment="Token Available"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="URGENT_CARGUS_TOKEN_TOKEN" indexType="btree">
+            <column name="token"/>
+        </index>
+    </table>
+
+    <table name="urgent_cargus_awb" resource="default" engine="innodb" comment="Urgent Cargus AWB Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="order_id" length="32" nullable="true" comment="Increment Order ID"/>
+        <column xsi:type="smallint" name="printed" unsigned="true" nullable="false" default="0" comment="Printed"/>
+        <column xsi:type="varchar" name="awb_no" nullable="true" length="100" comment="AWB Number"/>
+        <column xsi:type="varchar" name="return_code" nullable="true" length="255" comment="Return Code"/>
+        <column xsi:type="varchar" name="return_awb" nullable="true" length="255" comment="Return Awb"/>
+        <column xsi:type="int" name="pickup_location_id" nullable="false" comment="PickUp Location ID"/>
+        <column xsi:type="int" name="pudo_id" nullable="false" default="0" comment="Pudo ID"/>
+        <column xsi:type="varchar" name="recipient_name" nullable="false" length="150" comment="Recipient Name"/>
+        <column xsi:type="int" name="county_id" nullable="false" comment="County Id"/>
+        <column xsi:type="varchar" name="destination_county" nullable="false" length="150"
+                comment="Destination County"/>
+        <column xsi:type="int" name="locality_id" nullable="false" comment="Locality Id"/>
+        <column xsi:type="varchar" name="destination_locality" nullable="false" length="150"
+                comment="Destination Locality"/>
+        <column xsi:type="varchar" name="destination_address" nullable="false" length="255"
+                comment="Destination Address"/>
+        <column xsi:type="varchar" name="recipient_contact" nullable="false" length="255" comment="Recipient Contact"/>
+        <column xsi:type="varchar" name="recipient_phone" nullable="false" length="255" comment="Recipient Phone"/>
+        <column xsi:type="varchar" name="recipient_email" nullable="false" length="255" comment="Recipient Email"/>
+        <column xsi:type="varchar" name="zip_code" nullable="false" length="100" comment="Zip Code"/>
+        <column xsi:type="int" name="envelope" nullable="false" default="0" comment="Envelope"/>
+        <column xsi:type="int" name="parcel" nullable="false" default="0" comment="Parcel"/>
+        <column xsi:type="int" name="weight" nullable="false" default="0" comment="Weight"/>
+        <column xsi:type="int" name="length" nullable="false" default="0" comment="Length"/>
+        <column xsi:type="int" name="width" nullable="false" default="0" comment="Width"/>
+        <column xsi:type="int" name="height" nullable="false" default="0" comment="Height"/>
+        <column xsi:type="decimal" name="declared_value" scale="6" precision="20" nullable="false"
+                comment="Declared Value"/>
+        <column xsi:type="decimal" name="cash_refunds" scale="6" precision="20" nullable="false"
+                comment="Cash Refunds"/>
+        <column xsi:type="decimal" name="account_refunds" scale="6" precision="20" nullable="false"
+                comment="Account Refunds"/>
+        <column xsi:type="text" name="other_repayment" nullable="true"
+                comment="Other Repayment (Refund Package or Documents)"/>
+        <column xsi:type="smallint" name="shipping_payer" nullable="false" comment="Shipping Payer"/>
+        <column xsi:type="smallint" name="saturday_delivery" unsigned="true" nullable="false" default="0"
+                comment="Saturday Delivery"/>
+        <column xsi:type="smallint" name="morning_delivery" unsigned="true" nullable="false" default="0"
+                comment="Morning Delivery"/>
+        <column xsi:type="smallint" name="package_opening" unsigned="true" nullable="false" default="0"
+                comment="Package Opening"/>
+        <column xsi:type="text" name="observations" nullable="true" comment="Observations"/>
+        <column xsi:type="text" name="content" nullable="false" comment="Content"/>
+        <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created at"/>
+        <column xsi:type="datetime" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="URGENT_CARGUS_AWB_AWB_NO" indexType="btree">
+            <column name="awb_no"/>
+        </index>
+    </table>
+
+    <table name="urgent_cargus_pickup" resource="default" engine="innodb" comment="Urgent Cargus Pickup Truck Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="location_id" nullable="false" comment="Location ID"/>
+        <column xsi:type="datetime" name="start_date" nullable="false" comment="Start Date"/>
+        <column xsi:type="datetime" name="end_date" nullable="false" comment="End Date"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" default="1" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="URGENT_CARGUS_PICKUP" indexType="btree">
+            <column name="location_id"/>
+            <column name="start_date"/>
+            <column name="end_date"/>
+            <column name="status"/>
+        </index>
+    </table>
+
+    <table name="urgent_cargus_country" resource="default" engine="innodb" comment="List Of Country">
+        <column xsi:type="int" name="country_id" nullable="false" unsigned="true" comment="Country ID"/>
+        <column xsi:type="varchar" name="country_name" nullable="false" length="255" comment="Country Name"/>
+        <column xsi:type="varchar" name="abbreviation" nullable="false" length="5" comment="Abbreviation"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="country_id"/>
+        </constraint>
+        <index referenceId="URGENT_CARGUS_COUNTRY" indexType="btree">
+            <column name="country_name"/>
+            <column name="abbreviation"/>
+        </index>
+    </table>
+
+    <table name="urgent_cargus_county" resource="default" engine="innodb" comment="List Of County">
+        <column xsi:type="int" name="county_id" nullable="false" unsigned="true" comment="County ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="County Name"/>
+        <column xsi:type="varchar" name="abbreviation" nullable="false" length="5" comment="Abbreviation"/>
+        <column xsi:type="int" name="country_id" nullable="false" unsigned="true" comment="Country ID From Cargus"/>
+        <column xsi:type="int" name="region_id" nullable="true" comment="Region ID From Magento Table"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="county_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="URGENT_CARGUS_COUNTRY_COUNTRY_ID" table="urgent_cargus_county"
+                    column="country_id" referenceTable="urgent_cargus_country" referenceColumn="country_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="URGENT_CARGUS_COUNTY" indexType="btree">
+            <column name="name"/>
+            <column name="region_id"/>
+        </index>
+    </table>
+
+    <table name="urgent_cargus_city" resource="default" engine="innodb" comment="List Of City">
+        <column xsi:type="int" name="locality_id" nullable="false" unsigned="true" comment="Locality ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="City Name"/>
+        <column xsi:type="int" name="parent_id" padding="10" unsigned="true" nullable="false" comment="Parent ID"/>
+        <column xsi:type="varchar" name="parent_name" nullable="false" length="255" comment="Parent Name"/>
+        <column xsi:type="int" name="extra_km" padding="10" unsigned="true" nullable="false" comment="Extra Km"/>
+        <column xsi:type="smallint" name="in_network" unsigned="true" nullable="false" default="0"
+                comment="In Network"/>
+        <column xsi:type="int" name="county_id" nullable="false" unsigned="true" comment="County ID From Cargus"/>
+        <column xsi:type="int" name="country_id" nullable="false" unsigned="true" comment="Country ID From Cargus"/>
+        <column xsi:type="varchar" name="postal_code" nullable="false" length="100" comment="Postal Code"/>
+        <column xsi:type="varchar" name="max_hour" nullable="false" length="100" comment="Max Hour"/>
+        <column xsi:type="smallint" name="saturday_delivery" unsigned="true" nullable="false" default="0"
+                comment="Saturday Delivery"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="locality_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="URGENT_CARGUS_COUNTY_COUNTY_ID" table="urgent_cargus_city"
+                    column="county_id" referenceTable="urgent_cargus_county" referenceColumn="county_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="URGENT_CARGUS_COUNTRY_COUNTRY_ID" table="urgent_cargus_city"
+                    column="country_id" referenceTable="urgent_cargus_country" referenceColumn="country_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="URGENT_CARGUS_CITY" indexType="btree">
+            <column name="name"/>
+            <column name="county_id"/>
+            <column name="postal_code"/>
+        </index>
+    </table>
+</schema>

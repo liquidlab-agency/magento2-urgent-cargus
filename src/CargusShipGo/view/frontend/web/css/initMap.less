@@ -1,0 +1,333 @@
+.map {
+    height: 90vh;
+    
+    .map_content {
+        display: none;
+        position: absolute;
+        top: 30px;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        overflow: hidden;
+
+        & > div:first-child {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+
+            & > div:first-child {
+                flex: 4;
+                margin-right: 10px;
+
+            }
+
+            .pudo_search_container {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                box-sizing: border-box;
+                flex: 1;
+
+                hr {
+                    margin: 10px;
+                }
+
+                .pudo_search_header {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    #searchPudoInput {
+                        width: 100%;
+                        height: 25px;
+                        padding: 10px;
+                        margin: 0;
+                        background-color: #FFF;
+                        color: #000;
+                        border: 1px solid #CCC;
+                        border-radius: 5px;
+                        box-sizing: border-box;
+
+                        &:hover,
+                        &:focus,
+                        &:active {
+                            outline: none;
+                            box-shadow: none;
+                        }
+                    }
+
+                    .pudo_search_button {
+                        width: 100%;
+                        height: 25px;
+                        padding: 0;
+                        margin-top: 10px;
+                        border: 0;
+                        border-radius: 5px;
+                        background-color: #F1A832 !important;
+                        color: #FFF !important;
+                        box-shadow: 4px 4px 2px 0 rgba(0, 0, 0, .2);
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #FF8C00 !important;
+                        }
+                    }
+
+                    #error_search {
+                        margin: 0;
+                        padding: 5px 5px 0;
+                        font-size: 11px;
+                        color: #b30000;
+                    }
+                }
+
+                .pudo_search_elements {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+
+                    input,
+                    label {
+                        cursor: pointer;
+                    }
+                }
+
+                .pudo_search_body {
+                    height: 100%;
+                    overflow-y: auto;
+
+                    .pudo_search_list {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+
+                        .pudo-highlight {
+                            background-color: #F1A832 !important;
+                            color: #FFF !important;
+                        }
+
+                        .pudo_location_item {
+                            margin: 0 0 1px 0;
+                            padding: 5px;
+                            background-color: #EEE;
+                            cursor: pointer;
+
+                            .pudo_location_item_content {
+                                display: flex;
+                                flex-direction: row;
+
+                                .pudo_location_item_details {
+                                    flex: 1;
+
+                                    .pudo_location_item_name {
+                                        font-weight: 900;
+                                        font-size: 12px;
+                                        margin: 0 0 5px 0;
+                                    }
+
+                                    .pudo_location_item_address,
+                                    .pudo_location_item_locker {
+                                        font-size: 11px;
+                                    }
+
+                                    .pudo_location_item_locker {
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                .pudo_location_item_icon {
+                                    width: 40px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .pudo_container {
+            display: flex;
+            flex-direction: row;
+
+            .pudo_details {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                font-size: 10px;
+
+                .pudo_icon {
+                    max-width: 20px;
+                    margin-right: 5px;
+                }
+
+                .pudo_location_name {
+                    display: inherit;
+                    align-items: center;
+
+                    h2 {
+                        color: #4D4D4D;
+                        font-size: 15px;
+                        font-weight: 900;
+                        margin: 0;
+                    }
+
+                    .pudo_store_icon {
+                        max-width: 50px;
+                        margin-right: 10px;
+                    }
+                }
+
+                .pudo_location_address {
+                    font-weight: 500;
+                    color: #666;
+                }
+
+                .pudo_separator {
+                    border: 0;
+                    border-bottom: 1px solid #B3B3B3;
+                    width: 100%;
+                    margin: 5px 0;
+                }
+
+                .pudo_work_hours_container {
+                    display: inherit;
+                    flex-direction: row;
+                    align-items: center;
+                    color: #666;
+
+                    .pudo_work_hours {
+                        display: inherit;
+                        flex-direction: column;
+                        flex: auto;
+
+                        .pudo_work_hours_row {
+                            display: flex;
+                            flex-direction: row;
+
+                            span:first-of-type {
+                                flex: auto;
+                            }
+                        }
+                    }
+                }
+
+                .pudo_payment {
+                    display: inherit;
+                    flex-direction: row;
+                    align-items: center;
+                    color: #666;
+
+                    .pudo_details_row {
+                        display: inherit;
+                        flex-direction: row;
+                        flex: auto;
+
+                        span:first-of-type {
+                            flex: auto;
+                        }
+                    }
+                }
+
+                .pudo_details_locker {
+                    font-size: 13px;
+                    font-weight: bold;
+                    text-align: center;
+                    margin-top: 10px;
+                }
+
+                .pudo_select_button {
+                    margin-top: 15px;
+
+                    .pudo_button {
+                        width: 100%;
+                        border: 0;
+                        border-radius: 5px;
+                        padding: 0;
+                        margin: 5px 0;
+                        height: 30px;
+                        text-align: center;
+                        font-weight: bold;
+                        background-color: #F1A832 !important;
+                        color: #FFF !important;
+                        box-shadow: 4px 4px 2px 0 rgba(0, 0, 0, .2);
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #FF8C00 !important;
+                        }
+                    }
+                }
+            }
+
+            .pudo_location_image {
+                display: inherit;
+                align-items: center;
+                flex: 1;
+                margin-left: 10px;
+
+                img {
+                    border-radius: 15px;
+                }
+            }
+
+        }
+    }
+
+    .pudo_show_more {
+        .pudo_more_popup_container {
+            display: flex;
+            flex-direction: row;
+
+            .pudo_more_popup_details {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+
+                .pudo_more_popup_details_wrapper {
+                    .pudo_more_popup_address_details {
+                        .pudo_more_popup_location_address {
+                            display: flex;
+                            flex-direction: row;
+
+                            img {
+                                width: 120px;
+                            }
+                        }
+                    }
+                }
+
+                .pudo_more_popup_select_button {
+                    margin-top: 10px;
+
+                    .pudo_more_popup_button {
+                        max-width: 120px;
+                        width: 100%;
+                        height: 30px;
+                        padding: 0;
+                        border: 0;
+                        border-radius: 5px;
+                        background-color: #F1A832 !important;
+                        color: #FFF !important;
+                        box-shadow: 4px 4px 2px 0 rgba(0, 0, 0, 0.2);
+
+                        &:hover {
+                            background-color: #FF8C00 !important;
+                        }
+                    }
+                }
+            }
+
+            .pudo_more_popup_location_details {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,48 @@
+{
+    "name": "liquidlab-agency/module-base",
+    "description": "Urgent Base Module - Foundation module for Urgent shipping integrations",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Alexandru Marinescu",
+            "email": "alexandru.marinescu@tremend.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2",
+        "magento/framework": "^103.0",
+        "magento/module-backend": "^102.0",
+        "magento/module-config": "^101.2",
+        "magento/module-directory": "^100.4",
+        "magento/module-quote": "^101.2",
+        "magento/module-sales": "^103.0",
+        "magento/module-shipping": "^100.4",
+        "magento/module-store": "^101.1",
+        "laminas/laminas-dependency-plugin": "^2.1"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Urgent\\Base\\": ""
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Urgent/Base"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction" component="Magento_Sales/js/grid/tree-massactions">
+            <action name="urgent_cargus_add_order">
+                <settings>
+                    <url path="urgentcargus/order/massadd"/>
+                    <type>urgentcargus_addorders</type>
+                    <label translate="true">Add Orders to Cargus</label>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

@@ -1,0 +1,35 @@
+<?php
+
+use Urgent\CargusShipGo\Block\Adminhtml\Order\Pudo;
+use Magento\Framework\Escaper;
+
+/** @var Pudo $block */
+/** @var Escaper $escaper */
+
+?>
+
+<?php if ($block->hasPudo() && $pudo = $block->getPudo()): ?>
+    <section class="admin__page-section order-view-shipping-pudo">
+        <div class="admin__page-section-title">
+            <span class="title">Shipping Pudo Point</span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?= $escaper->escapeHtml($pudo->getName()) ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <div>
+                        <?= $escaper->escapeHtml(__('Street') . ': ') ?>
+                        <?= $escaper->escapeHtml($pudo->getStreetName()) ?>
+                        <?= $pudo->getStreetNo() ? ' ' . $escaper->escapeHtml($pudo->getStreetNo()) : null ?>
+                    </div>
+                    <div>
+                        <?= $escaper->escapeHtml($pudo->getCity()) ?>
+                        <?= $pudo->getPostalCode() ? ' ' . $escaper->escapeHtml($pudo->getPostalCode()) : null ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>

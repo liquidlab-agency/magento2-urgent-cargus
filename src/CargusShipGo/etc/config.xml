@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <cargus_shipandgo>
+                <model>Urgent\CargusShipGo\Model\Carrier\ShipAndGo</model>
+                <active>0</active>
+                <title>Cargus</title>
+                <name>Ship &amp; Go</name>
+                <price>0.00</price>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.
+                </specificerrmsg>
+                <sallowspecific>0</sallowspecific>
+                <has_map>1</has_map>
+                <chunk_list_no>100</chunk_list_no>
+            </cargus_shipandgo>
+        </carriers>
+    </default>
+</config>

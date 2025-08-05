@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="urgent_cargus_pudo" resource="default" engine="innodb" comment="Urgent Cargus Token Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="pudo_id" unsigned="true" nullable="false" comment="Pudo ID"/>
+        <column xsi:type="varchar" name="symbol" nullable="false" length="255" comment="Symbol"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="int" name="location_id" nullable="false" comment="Location ID"/>
+        <column xsi:type="int" name="county_id" nullable="false" comment="County ID"/>
+        <column xsi:type="varchar" name="county" nullable="false" length="255" comment="County"/>
+        <column xsi:type="int" name="city_id" nullable="false" comment="City ID"/>
+        <column xsi:type="varchar" name="city" nullable="false" length="255" comment="City"/>
+        <column xsi:type="int" name="street_id" nullable="false" comment="Street ID"/>
+        <column xsi:type="varchar" name="street_name" nullable="false" length="255" comment="Street Name"/>
+        <column xsi:type="int" name="zone_id" nullable="false" comment="Zone ID"/>
+        <column xsi:type="varchar" name="postal_code" nullable="true" length="100" comment="Postal Code"/>
+        <column xsi:type="varchar" name="entrance" nullable="true" length="100" comment="Entrance"/>
+        <column xsi:type="varchar" name="floor" nullable="true" length="100" comment="Floor"/>
+        <column xsi:type="varchar" name="apartment" nullable="true" length="100" comment="Apartment"/>
+        <column xsi:type="varchar" name="sector" nullable="true" length="100" comment="Sector"/>
+        <column xsi:type="varchar" name="address" nullable="true" length="255" comment="Address"/>
+        <column xsi:type="text" name="address_description" nullable="true" comment="Address Description"/>
+        <column xsi:type="varchar" name="additional_address_info" nullable="true" length="255" comment="Additional Address Info"/>
+        <column xsi:type="decimal" name="longitude" scale="6" precision="9" unsigned="false" nullable="false" comment="Longitude"/>
+        <column xsi:type="decimal" name="latitude" scale="6" precision="9" unsigned="false" nullable="false" comment="Latitude"/>
+        <column xsi:type="int" padding="5" name="point_type" nullable="false" comment="Point Type"/>
+        <column xsi:type="varchar" name="open_hours_mo_start" nullable="true" length="50" comment="Open Hours Monday Start"/>
+        <column xsi:type="varchar" name="open_hours_mo_end" nullable="true" length="50" comment="Open Hours Monday End"/>
+        <column xsi:type="varchar" name="open_hours_tu_start" nullable="true" length="50" comment="Open Hours Tuesday Start"/>
+        <column xsi:type="varchar" name="open_hours_tu_end" nullable="true" length="50" comment="Open Hours Tuesday End"/>
+        <column xsi:type="varchar" name="open_hours_we_start" nullable="true" length="50" comment="Open Hours Wednesday Start"/>
+        <column xsi:type="varchar" name="open_hours_we_end" nullable="true" length="50" comment="Open Hours Wednesday End"/>
+        <column xsi:type="varchar" name="open_hours_th_start" nullable="true" length="50" comment="Open Hours Thursday Start"/>
+        <column xsi:type="varchar" name="open_hours_th_end" nullable="true" length="50" comment="Open Hours Thursday End"/>
+        <column xsi:type="varchar" name="open_hours_fr_start" nullable="true" length="50" comment="Open Hours Friday Start"/>
+        <column xsi:type="varchar" name="open_hours_fr_end" nullable="true" length="50" comment="Open Hours Friday End"/>
+        <column xsi:type="varchar" name="open_hours_sa_start" nullable="true" length="50" comment="Open Hours Saturday Start"/>
+        <column xsi:type="varchar" name="open_hours_sa_end" nullable="true" length="50" comment="Open Hours Saturday End"/>
+        <column xsi:type="varchar" name="open_hours_su_start" nullable="true" length="50" comment="Open Hours Sunday Start"/>
+        <column xsi:type="varchar" name="open_hours_su_end" nullable="true" length="50" comment="Open Hours Sunday End"/>
+        <column xsi:type="varchar" name="street_no" nullable="true" length="50" comment="Street Number"/>
+        <column xsi:type="varchar" name="phone_number" nullable="true" length="50" comment="Phone Number"/>
+        <column xsi:type="int" padding="5" name="service_cod" nullable="false" default="0" comment="Service COD"/>
+        <column xsi:type="int" padding="5" name="payment_type" nullable="false" comment="Payment Type"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="main_picture" nullable="true" length="255" comment="Main Picture"/>
+        <column xsi:type="varchar" name="accepted_payment_type" nullable="true" length="255" comment="Accepted Payment Type"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="URGENT_CARGUS_PUDO_PUDO_ID" indexType="btree">
+            <column name="pudo_id"/>
+        </index>
+        <index referenceId="URGENT_CARGUS_PUDO_COUNTY_ID" indexType="btree">
+            <column name="county_id"/>
+        </index>
+        <index referenceId="URGENT_CARGUS_PUDO_COUNTY" indexType="btree">
+            <column name="county"/>
+        </index>
+        <index referenceId="URGENT_CARGUS_PUDO_CITY_ID" indexType="btree">
+            <column name="city_id"/>
+        </index>
+        <index referenceId="URGENT_CARGUS_PUDO_CITY" indexType="btree">
+            <column name="city"/>
+        </index>
+    </table>
+
+    <table name="quote_address">
+        <column xsi:type="int" name="pudo_id" nullable="true" comment="Pudo Id"/>
+    </table>
+    <table name="sales_order_address">
+        <column xsi:type="int" name="pudo_id" nullable="true" comment="Pudo Id"/>
+    </table>
+</schema>

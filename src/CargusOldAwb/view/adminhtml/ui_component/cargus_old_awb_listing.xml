@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cargus_old_awb_listing.cargus_old_awb_listing_data_source</item>
+            <item name="deps" xsi:type="string">cargus_old_awb_listing.cargus_old_awb_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">cargus_old_columns</item>
+    </argument>
+    <dataSource name="cargus_old_awb_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Urgent\CargusOldAwb\Ui\Component\Awb\Listing\DataProvider</argument>
+            <argument name="name" xsi:type="string">cargus_old_awb_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="cargus_old_columns">
+        <column name="id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="order_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order ID</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="pickup_location_id">
+            <settings>
+                <label translate="true">PickUp Loc ID</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="cod_bara">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Awb No</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="nume_dest">
+            <settings>
+                <label translate="true">Recipient Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="localitate_dest">
+            <settings>
+                <label translate="true">Recipient Destination</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="contact_dest">
+            <settings>
+                <label translate="true">Recipient Contact</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="telefon_dest">
+            <settings>
+                <label translate="true">Recipient Phone</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Urgent\CargusOldAwb\Ui\Component\Awb\Listing\Column\Actions">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

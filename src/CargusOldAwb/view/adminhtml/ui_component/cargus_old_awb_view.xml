@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cargus_old_awb_view.cargus_old_awb_view_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Urgent\CargusOldAwb\Block\Adminhtml\Edit\BackButton"/>
+        </buttons>
+        <namespace>cargus_old_awb_view</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>cargus_old_awb_view.cargus_old_awb_view_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="cargus_old_awb_view_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <dataProvider class="Urgent\CargusOldAwb\Ui\Component\Awb\View\DataProvider" name="cargus_old_awb_view_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="order_id" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Order ID</label>
+                <dataScope>order_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="pickup_location_id" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Order ID</label>
+                <dataScope>pickup_location_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="cod_bara" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Cod Bara</label>
+                <dataScope>cod_bara</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="nume_dest" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Nume Destinatar</label>
+                <dataScope>nume_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="judet_id" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Judet ID</label>
+                <dataScope>judet_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="judet_dest" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Judet Destinatar</label>
+                <dataScope>judet_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="localitate_id" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Localitate ID</label>
+                <dataScope>localitate_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="localitate_dest" sortOrder="80" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Localitate Destinatar</label>
+                <dataScope>localitate_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="adresa_dest" sortOrder="90" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Adresa Destinatar</label>
+                <dataScope>adresa_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="contact_dest" sortOrder="100" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Contact Destinatar</label>
+                <dataScope>contact_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="telefon_dest" sortOrder="110" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Telefon Destinatar</label>
+                <dataScope>telefon_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="email_dest" sortOrder="120" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Email Destinatar</label>
+                <dataScope>email_dest</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="cod_postal" sortOrder="130" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Cod Postal</label>
+                <dataScope>cod_postal</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="plicuri" sortOrder="140" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Plicuri</label>
+                <dataScope>plicuri</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="colete" sortOrder="150" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Colete</label>
+                <dataScope>colete</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="kilograme" sortOrder="160" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Kilograme</label>
+                <dataScope>kilograme</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="lungime" sortOrder="170" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Lungime</label>
+                <dataScope>lungime</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="latime" sortOrder="180" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Latime</label>
+                <dataScope>latime</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="inaltime" sortOrder="190" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Inaltime</label>
+                <dataScope>inaltime</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="valoare_declarata" sortOrder="200" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Valoare Declarata</label>
+                <dataScope>valoare_declarata</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="ramburs_numerar" sortOrder="210" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Ramburs Numerar</label>
+                <dataScope>ramburs_numerar</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="ramburs_cont" sortOrder="220" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Ramburs Cont</label>
+                <dataScope>ramburs_cont</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="ramburs_alt" sortOrder="230" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Ramburs Alt</label>
+                <dataScope>ramburs_alt</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="platitor_expeditie" sortOrder="260" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Platitor Expeditie</label>
+                <dataScope>platitor_expeditie</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string">Expeditor</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">2</item>
+                                <item name="label" xsi:type="string">Destinatar</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="livrare_sambata" sortOrder="260" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Livrare Sambata</label>
+                <dataScope>livrare_sambata</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="livrare_dimineata" sortOrder="260" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Livrare Dimineata</label>
+                <dataScope>livrare_dimineata</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="deschidere_colet" sortOrder="270" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Deschidere Colet</label>
+                <dataScope>deschidere_colet</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="observatii" sortOrder="280" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Observatii</label>
+                <dataScope>observatii</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="continut" sortOrder="290" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Continut</label>
+                <dataScope>continut</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="pudo_id" sortOrder="310" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Pudo ID</label>
+                <dataScope>pudo_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+</form>

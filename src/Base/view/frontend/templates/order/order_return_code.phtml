@@ -1,0 +1,46 @@
+<?php
+
+use Magento\Framework\Escaper;
+use Urgent\Base\Block\Order\ReturnCode;
+
+/* @var ReturnCode $block */
+/* @var Escaper $escaper */
+$returnCode = $block->getReturnCode();
+?>
+
+<?php if ($returnCode): ?>
+    <div class="block block-order-details-view">
+        <div class="block-content">
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span>Return Code</span>
+                </strong>
+                <div class="box-content" style="text-align: center;">
+                    <div>
+                        <?= //phpcs:ignore Magento2.Security.XssTemplate.FoundUnescaped
+                        $block->getQrReturnCode()
+                        ?>
+                    </div>
+                    <div>
+                        <a style="cursor: pointer;" onclick="copyReturnCode(this)">
+                            <?= $escaper->escapeHtml($returnCode) ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function copyReturnCode(el) {
+        el = jQuery(el);
+        if (navigator.clipboard) {
+            let text = el.html().trim();
+            navigator.clipboard.writeText(text);
+            el.html('<?= __("Copied") ?>');
+            setTimeout(function () {
+                el.html(text);
+            }, 1500, el)
+        }
+    }
+</script>
+<?php endif; ?>

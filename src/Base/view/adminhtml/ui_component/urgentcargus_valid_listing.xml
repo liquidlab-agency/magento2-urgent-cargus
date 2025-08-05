@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">urgentcargus_valid_listing.urgentcargus_valid_listing_data_source</item>
+            <item name="deps" xsi:type="string">urgentcargus_valid_listing.urgentcargus_valid_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">cargus_awb_valid_grid_columns</item>
+    </argument>
+    <dataSource name="urgentcargus_valid_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Urgent\Base\Ui\Component\DataProvider\ValidDataProvider</argument>
+            <argument name="name" xsi:type="string">urgentcargus_valid_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="urgentcargus/valid/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="cargus_awb_valid_grid_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="order_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order ID</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="awb_no">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">AWB No</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="pickup_location_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Urgent\Base\Model\Config\Source\LiftingPoint"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Pickup Loc ID</label>
+            </settings>
+        </column>
+        <column name="recipient_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Recipient Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="destination_locality">
+            <settings>
+                <label translate="true">Recipient Destination</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="zip_code">
+            <settings>
+                <label translate="true">Zip Code</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="envelope">
+            <settings>
+                <label translate="true">Envelope</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="parcel">
+            <settings>
+                <label translate="true">Parcel</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="weight">
+            <settings>
+                <bodyTmpl>Urgent_Base/ui/grid/cells/weight</bodyTmpl>
+                <label translate="true">Weight</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="length">
+            <settings>
+                <bodyTmpl>Urgent_Base/ui/grid/cells/length</bodyTmpl>
+                <label translate="true">Length</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="width">
+            <settings>
+                <bodyTmpl>Urgent_Base/ui/grid/cells/length</bodyTmpl>
+                <label translate="true">Width</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="height">
+            <settings>
+                <bodyTmpl>Urgent_Base/ui/grid/cells/length</bodyTmpl>
+                <label translate="true">Height</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="cash_refunds">
+            <settings>
+                <bodyTmpl>Urgent_Base/ui/grid/cells/currency</bodyTmpl>
+                <label translate="true">Cash Refunds</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="account_refunds">
+            <settings>
+                <bodyTmpl>Urgent_Base/ui/grid/cells/currency</bodyTmpl>
+                <label translate="true">Account Refunds</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="shipping_payer" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Urgent\Base\Model\Config\Source\Payer"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Shipping Payer</label>
+            </settings>
+        </column>
+        <column name="printed" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Printed</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Urgent\Base\Ui\Component\Valid\Listing\Column\Actions">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

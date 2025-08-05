@@ -1,0 +1,10 @@
+<?php
+/** @var \Urgent\Base\Block\Adminhtml\System\Config\Button $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div class="actions">
+    <button class="actions" type="button" id="<?= $block->getHtmlId() ?>"
+            onclick="location.href='<?= $escaper->escapeHtml($block->getButtonUrl()) ?>'">
+        <span><?= $escaper->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+</div>

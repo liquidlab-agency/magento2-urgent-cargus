@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Urgent_CargusOldAwb::old_index" title="Old Module AWBs" module="Urgent_CargusOldAwb" sortOrder="100"
+             parent="Urgent_Base::urgentcargus" action="cargus_old/awb" resource="Urgent_CargusOldAwb::old_index"/>
+    </menu>
+</config>

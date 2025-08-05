@@ -1,0 +1,43 @@
+<?php
+
+use Magento\Framework\Escaper;
+use Urgent\CargusShipGo\Block\Order\Info;
+
+/* @var Info $block */
+/* @var Escaper $escaper */
+
+$googleUrl = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=';
+$wazeUrl = 'https://waze.com/ul?ll=';
+?>
+
+<?php if ($block->hasPudo() && $pudo = $block->getPudo()): ?>
+    <div class="block block-order-details-view">
+        <div class="block-content">
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span>Shipping Pudo Point</span>
+                </strong>
+                <div class="box-content">
+                    <div><?= $escaper->escapeHtml($pudo->getName()) ?></div>
+                    <div>
+                        <?= $escaper->escapeHtml(__('Street') . ': ') ?>
+                        <?= $escaper->escapeHtml($pudo->getStreetName()) ?>
+                        <?= $pudo->getStreetNo() ? ' ' . $escaper->escapeHtml($pudo->getStreetNo()) : null ?>
+                    </div>
+                    <div>
+                        <?= $escaper->escapeHtml($pudo->getCity()) ?>
+                        <?= $pudo->getPostalCode() ? ' ' . $escaper->escapeHtml($pudo->getPostalCode()) : null ?>
+                    </div>
+                    <div>
+                        <a href="<?= $escaper->escapeHtml($googleUrl .
+                            $pudo->getLatitude() . ',' .
+                            $pudo->getLongitude()) ?>" target="_blank" title="Google Map">Google Map</a> |
+                        <a href="<?= $escaper->escapeHtml($wazeUrl .
+                            $pudo->getLatitude() . ',' .
+                            $pudo->getLongitude()) ?>&navigate=yes" target="_blank" title="Waze Map">Waze Map</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

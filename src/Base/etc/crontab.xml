@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="urgent_cargus">
+        <job name="urgent_cargus_nomenclature" instance="Urgent\Base\Cron\Nomenclature\Update" method="execute">
+            <config_path>urgent_cargus_nomenclature/nomenclature_update/cron_sechdule</config_path>
+        </job>
+    </group>
+</config>

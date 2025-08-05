@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Urgent_Base::main" title="Cargus" module="Urgent_Base" sortOrder="50"
+             resource="Urgent_Base::main"/>
+        <add id="Urgent_Base::config_menu" title="Configs" module="Urgent_Base" sortOrder="10"
+             parent="Urgent_Base::main" resource="Urgent_Base::config_menu"/>
+        <add id="Urgent_Base::config" title="General" module="Urgent_Base" sortOrder="10"
+             parent="Urgent_Base::config_menu" action="admin/system_config/edit/section/urgent_cargus/"
+             resource="Urgent_Base::config"/>
+
+        <add id="Urgent_Base::config_directory_update" title="Update Nomenclature" module="Urgent_Base" sortOrder="90"
+             parent="Urgent_Base::config_menu" action="urgentcargus/nomenclature/update"
+             resource="Urgent_Base::config_directory_update"/>
+
+        <add id="Urgent_Base::urgentcargus" title="Urgent Cargus" module="Urgent_Base" sortOrder="20"
+             parent="Urgent_Base::main" resource="Urgent_Base::urgentcargus"/>
+        <add id="Urgent_Base::awb_grid" title="Waiting AWBs Grid" module="Urgent_Base" sortOrder="10"
+             parent="Urgent_Base::urgentcargus" action="urgentcargus/awb" resource="Urgent_Base::awb_grid"/>
+        <add id="Urgent_Base::awb_valid_grid" title="Valid AWBs Grid" module="Urgent_Base" sortOrder="20"
+             parent="Urgent_Base::urgentcargus" action="urgentcargus/valid" resource="Urgent_Base::awb_valid_grid"/>
+        <add id="Urgent_Base::pickup_grid" title="Pickup Grid" module="Urgent_Base" sortOrder="30"
+             parent="Urgent_Base::urgentcargus" action="urgentcargus/pickup" resource="Urgent_Base::pickup_grid"/>
+    </menu>
+</config>

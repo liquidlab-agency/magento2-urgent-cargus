@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cargus_old_awb_listing_data_source" xsi:type="string">OldAwbCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="OldAwbCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">awb_expeditii</argument>
+            <argument name="resourceModel" xsi:type="string">\Urgent\CargusOldAwb\Model\ResourceModel\OldAwb</argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">urgentcargus_pickup_add.urgentcargus_pickup_add_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Urgent\Base\Block\Adminhtml\Edit\BackButton"/>
+            <button name="save" class="Urgent\Base\Block\Adminhtml\Edit\SaveButton"/>
+        </buttons>
+        <namespace>urgentcargus_pickup_add</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>urgentcargus_pickup_add.urgentcargus_pickup_add_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="urgentcargus_pickup_add_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="urgentcargus/pickup/save"/>
+        </settings>
+        <dataProvider class="Urgent\Base\Ui\Component\Pickup\View\DataProvider" name="urgentcargus_pickup_add_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+        <field name="location_id" sortOrder="10" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Location</label>
+                <dataScope>location_id</dataScope>
+                <validation>
+                    <rule xsi:type="boolean" active="true" name="required-entry">true</rule>
+                    <rule xsi:type="boolean" active="true" name="validate-select">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Urgent\Base\Model\Config\Source\LiftingPoint"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="date" sortOrder="20" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Date</label>
+                <dataScope>date</dataScope>
+            </settings>
+        </field>
+        <field name="start_hour" sortOrder="30" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Start Hour</label>
+                <dataScope>start_hour</dataScope>
+                <validation>
+                    <rule xsi:type="boolean" active="true" name="required-entry">true</rule>
+                    <rule xsi:type="boolean" active="true" name="validate-select">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Urgent\Base\Model\Config\Source\StartHour"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="end_hour" sortOrder="40" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">End Hour</label>
+                <dataScope>end_hour</dataScope>
+                <validation>
+                    <rule xsi:type="boolean" active="true" name="required-entry">true</rule>
+                    <rule xsi:type="boolean" active="true" name="validate-select">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Urgent\Base\Model\Config\Source\EndHour"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

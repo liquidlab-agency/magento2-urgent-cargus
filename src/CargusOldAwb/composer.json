@@ -1,0 +1,44 @@
+{
+    "name": "liquidlab-agency/module-cargus-old-awb",
+    "description": "Urgent Cargus Old AWB Module - Display and manage old AWB functionality",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Alexandru Marinescu",
+            "email": "alexandru.marinescu@tremend.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2",
+        "liquidlab-agency/module-base": "^1.0",
+        "magento/framework": "^103.0",
+        "magento/module-backend": "^102.0",
+        "magento/module-sales": "^103.0",
+        "magento/module-ui": "^101.2"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Urgent\\CargusOldAwb\\": ""
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Urgent/CargusOldAwb"
+            ]
+        ]
+    }
+}

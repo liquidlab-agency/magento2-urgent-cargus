@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <urgent_cargus>
+            <general>
+                <package_opening>0</package_opening>
+                <insurance>0</insurance>
+                <saturday_delivery>0</saturday_delivery>
+                <morning_delivery>0</morning_delivery>
+                <repayment>0</repayment>
+                <payer>1</payer>
+                <default_shipment_type>0</default_shipment_type>
+                <service>1</service>
+                <consumer_return>0</consumer_return>
+                <consumer_return_days>0</consumer_return_days>
+            </general>
+            <default_values>
+                <length>0</length>
+                <width>0</width>
+                <height>0</height>
+                <weight>0</weight>
+            </default_values>
+            <api>
+                <active>0</active>
+                <url>https://urgentcargus.azure-api.net/api/</url>
+                <timeout>10</timeout>
+            </api>
+            <debug>
+                <logger>0</logger>
+            </debug>
+        </urgent_cargus>
+        <urgent_cargus_nomenclature>
+            <nomenclature_update>
+                <cron_sechdule>30 5 * * 0</cron_sechdule>
+            </nomenclature_update>
+        </urgent_cargus_nomenclature>
+    </default>
+</config>

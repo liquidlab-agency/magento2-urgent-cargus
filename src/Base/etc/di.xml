@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Urgent\Base\Api\Data\TokenInterface" type="Urgent\Base\Model\Token"/>
+    <preference for="Urgent\Base\Api\Data\AwbInterface" type="Urgent\Base\Model\Awb"/>
+    <preference for="Urgent\Base\Api\Data\PickupInterface" type="Urgent\Base\Model\Pickup"/>
+    <preference for="Urgent\Base\Api\Data\CountryInterface" type="Urgent\Base\Model\Nomenclature\Country"/>
+    <preference for="Urgent\Base\Api\Data\CountyInterface" type="Urgent\Base\Model\Nomenclature\County"/>
+    <preference for="Urgent\Base\Api\Data\CityInterface" type="Urgent\Base\Model\Nomenclature\City"/>
+    <preference for="Urgent\Base\Api\TokenRepositoryInterface" type="Urgent\Base\Model\TokenRepository"/>
+    <preference for="Urgent\Base\Api\AwbRepositoryInterface" type="Urgent\Base\Model\AwbRepository"/>
+    <preference for="Urgent\Base\Api\PickupRepositoryInterface" type="Urgent\Base\Model\PickupRepository"/>
+    <preference for="Urgent\Base\Api\CountryRepositoryInterface" type="Urgent\Base\Model\CountryRepository"/>
+    <preference for="Urgent\Base\Api\CountyRepositoryInterface" type="Urgent\Base\Model\CountyRepository"/>
+    <preference for="Urgent\Base\Api\CityRepositoryInterface" type="Urgent\Base\Model\CityRepository"/>
+
+    <type name="Urgent\Base\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Urgent\Base\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">UrgentCargusLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Urgent\Base\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="urgentcargus_awb_listing_data_source" xsi:type="string">WaitingAwbGridCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="WaitingAwbGridCollection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">urgent_cargus_awb</argument>
+            <argument name="resourceModel" xsi:type="string">\Urgent\Base\Model\ResourceModel\Awb</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="urgentcargus_valid_listing_data_source" xsi:type="string">ValidAwbGridCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="ValidAwbGridCollection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">urgent_cargus_awb</argument>
+            <argument name="resourceModel" xsi:type="string">\Urgent\Base\Model\ResourceModel\Awb</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="urgentcargus_pickup_listing_data_source" xsi:type="string">PickupGridCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="PickupGridCollection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">urgent_cargus_pickup</argument>
+            <argument name="resourceModel" xsi:type="string">\Urgent\Base\Model\ResourceModel\Pickup</argument>
+        </arguments>
+    </virtualType>
+</config>

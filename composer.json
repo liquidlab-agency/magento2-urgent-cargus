@@ -1,0 +1,45 @@
+{
+    "name": "liquidlab-agency/magento2-urgent-cargus",
+    "type": "magento2-component",
+    "license": "proprietary",
+    "description": "Urgent Shipping Modules Suite - Complete Cargus shipping integration for Magento 2",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Alexandru Marinescu",
+            "email": "alexandru.marinescu@tremend.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2|^8.3",
+        "magento/framework": "^103.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Base/registration.php",
+            "src/Cargus/registration.php",
+            "src/CargusOldAwb/registration.php",
+            "src/CargusShipGo/registration.php"
+        ],
+        "psr-4": {
+            "Urgent\\Base\\": "src/Base",
+            "Urgent\\Cargus\\": "src/Cargus",
+            "Urgent\\CargusOldAwb\\": "src/CargusOldAwb",
+            "Urgent\\CargusShipGo\\": "src/CargusShipGo"
+        }
+    },
+    "replace": {
+        "liquidlab-agency/module-base": "*",
+        "liquidlab-agency/module-cargus": "*",
+        "liquidlab-agency/module-cargus-old-awb": "*",
+        "liquidlab-agency/module-cargusshipgo": "*"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "magento/magento-composer-installer": true,
+            "magento/inventory-composer-installer": true
+        }
+    }
+}

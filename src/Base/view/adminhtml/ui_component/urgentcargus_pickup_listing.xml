@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                urgentcargus_pickup_listing.urgentcargus_pickup_listing_data_source
+            </item>
+            <item name="deps" xsi:type="string">urgentcargus_pickup_listing.urgentcargus_pickup_listing_data_source
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">cargus_pickup_grid_columns</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="urgentcargus/pickup/add"/>
+                <class>primary</class>
+                <label translate="true">Create New Pickup</label>
+                <aclResource>Urgent_Base::pickup_edit</aclResource>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="urgentcargus_pickup_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Urgent\Base\Ui\Component\DataProvider\PickupDataProvider</argument>
+            <argument name="name" xsi:type="string">urgentcargus_pickup_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="cargus_pickup_grid_columns">
+        <column name="id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="location_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Urgent\Base\Model\Config\Source\LiftingPoint"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Pickup Loc ID</label>
+            </settings>
+        </column>
+        <column name="start_date" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">Start Date</label>
+            </settings>
+        </column>
+        <column name="end_date" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">End Date</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Urgent\Base\Ui\Component\Pickup\Listing\Column\Status\Options"/>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Urgent\Base\Ui\Component\Pickup\Listing\Column\Actions">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

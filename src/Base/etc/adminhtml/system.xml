@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="urgent_cargus" translate="label" sortOrder="500">
+            <label>Urgent Cargus</label>
+        </tab>
+        <section id="urgent_cargus" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+                 translate="label">
+            <tab>urgent_cargus</tab>
+            <label>General</label>
+            <resource>Urgent_Base::config</resource>
+            <group id="general" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>General</label>
+                <field id="lifting_point" type="select" sortOrder="10" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label">
+                    <label>Lifting Point</label>
+                    <source_model>Urgent\Base\Model\Config\Source\LiftingPoint</source_model>
+                </field>
+                <field id="package_opening" type="select" sortOrder="20" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Package Opening</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="insurance" type="select" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Insurance</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="saturday_delivery" type="select" sortOrder="40" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Saturday Delivery</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="morning_delivery" type="select" sortOrder="50" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Morning Delivery</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="repayment" type="select" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Repayment</label>
+                    <source_model>Urgent\Base\Model\Config\Source\Repayment</source_model>
+                </field>
+                <field id="payer" type="select" sortOrder="70" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Payer</label>
+                    <source_model>Urgent\Base\Model\Config\Source\Payer</source_model>
+                </field>
+                <field id="default_shipment_type" type="select" sortOrder="80" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Default Shipment Type</label>
+                    <source_model>Urgent\Base\Model\Config\Source\ShipmentType</source_model>
+                </field>
+                <field id="service" type="select" sortOrder="80" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Service</label>
+                    <source_model>Urgent\Base\Model\Config\Source\Service</source_model>
+                </field>
+                <field id="price_table" type="select" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label">
+                    <label>Price Table</label>
+                    <source_model>Urgent\Base\Model\Config\Source\PriceTable</source_model>
+                </field>
+                <field id="consumer_return" type="select" sortOrder="100" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Consumer Return</label>
+                    <source_model>Urgent\Base\Model\Config\Source\ConsumerReturn</source_model>
+                    <depends>
+                        <field id="repayment">1</field>
+                    </depends>
+                </field>
+                <field id="consumer_return_days" type="text" sortOrder="110" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Validity (days)</label>
+                    <validate>validate-number validate-zero-or-greater number-range-0-180</validate>
+                    <depends>
+                        <field id="consumer_return" separator=",">1,2</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="location" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1"
+                   translate="comment label">
+                <label>Location</label>
+                <comment><![CDATA[The location from where the packages are leaving.<br>It is used on delivery methods if you use dynamic price.]]></comment>
+                <field id="county" type="select" sortOrder="10" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label">
+                    <label>County</label>
+                    <source_model>Urgent\Base\Model\Config\Source\County</source_model>
+                    <comment>If you don't see any value in the dropdown, you have to configure the nomenclature section and run the update</comment>
+                </field>
+                <field id="city" type="select" sortOrder="20" showInWebsite="1" showInStore="1"
+                       showInDefault="1"
+                       translate="label">
+                    <label>City</label>
+                    <source_model>Urgent\Base\Model\Config\Source\CityFilter</source_model>
+                </field>
+            </group>
+            <group id="default_values" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1"
+                   translate="label">
+                <label>Default Values</label>
+                <field id="length" translate="label" type="text" sortOrder="10" showInWebsite="1" showInStore="1"
+                       showInDefault="1">
+                    <label>Length</label>
+                    <comment>Please insert in cm</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number</validate>
+                </field>
+                <field id="width" translate="label" type="text" sortOrder="20" showInWebsite="1" showInStore="1"
+                       showInDefault="1">
+                    <label>Width</label>
+                    <comment>Please insert in cm</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number</validate>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="30" showInWebsite="1" showInStore="1"
+                       showInDefault="1">
+                    <label>Height</label>
+                    <comment>Please insert in cm</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number</validate>
+                </field>
+                <field id="weight" translate="label" type="text" sortOrder="40" showInWebsite="1" showInStore="1"
+                       showInDefault="1">
+                    <label>Weight</label>
+                    <comment>Please insert in kg</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number</validate>
+                </field>
+            </group>
+            <group id="api" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>Api</label>
+                <field id="active" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="20" showInWebsite="1" showInStore="1"
+                       showInDefault="1" canRestore="1">
+                    <label>URL</label>
+                    <comment>Example: https://urgentcargus.azure-api.net/api/</comment>
+                </field>
+                <field id="url_v4" translate="label" type="text" sortOrder="25" showInWebsite="1" showInStore="1"
+                       showInDefault="1" canRestore="1">
+                    <label>URL V4</label>
+                    <comment><![CDATA[
+                        <span>Used for external shipments. Ex: Bulgaria, Greece etc.</span><br>
+                        <span>Example: https://webexpresstestapiv4.azurewebsites.net/api/</span>
+                    ]]></comment>
+                </field>
+                <field id="key" translate="label" type="text" sortOrder="30" showInWebsite="1" showInStore="1"
+                       showInDefault="1">
+                    <label>Key</label>
+                </field>
+                <field id="username" translate="label" type="text" sortOrder="30" showInWebsite="1" showInStore="1"
+                       showInDefault="1">
+                    <label>Username</label>
+                </field>
+                <field id="password" translate="label" type="obscure" sortOrder="40" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="timeout" translate="label" type="text" sortOrder="50" showInWebsite="1" showInStore="1"
+                       showInDefault="1" canRestore="1">
+                    <label>Timeout</label>
+                    <validate>integer</validate>
+                </field>
+                <field id="clear_token" translate="label comment" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label></label>
+                    <button_label>Clear Token</button_label>
+                    <button_url>urgentcargus/token/clear</button_url>
+                    <frontend_model>Urgent\Base\Block\Adminhtml\System\Config\Button</frontend_model>
+                    <comment>Have to clear the token if you modify api configs from above.</comment>
+                </field>
+            </group>
+            <group id="debug" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>Debug</label>
+                <field id="logger" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label" canRestore="1">
+                    <label>Logger Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>File: urgent_cargus.log</comment>
+                </field>
+            </group>
+        </section>
+        <section id="urgent_cargus_nomenclature" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1"
+                 translate="label">
+            <tab>urgent_cargus</tab>
+            <label>Nomenclature</label>
+            <resource>Urgent_Base::config</resource>
+            <group id="nomenclature_update" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+                   translate="label">
+                <label>Update</label>
+                <field id="specific_country" type="multiselect" sortOrder="1" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label">
+                    <label>Countries</label>
+                    <can_be_empty>1</can_be_empty>
+                    <source_model>Urgent\Base\Model\Config\Source\Country</source_model>
+                    <comment><![CDATA[What is selected only for that country's nomenclature is updated with counties and cities.<br>
+                        <span style="color:#eb5202">If the field from above is empty please click the start button from below.</span>]]>
+                    </comment>
+                </field>
+                <field id="update" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Update Countries</label>
+                    <button_label>Start</button_label>
+                    <button_url>urgentcargus/nomenclature/country</button_url>
+                    <frontend_model>Urgent\Base\Block\Adminhtml\System\Config\Button</frontend_model>
+                </field>
+                <field id="cron_sechdule" translate="label comment" type="text" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Cron Schedule</label>
+                    <comment><![CDATA[The schedule at which the cron runs.<br />
+                        <a href="https://crontab.guru/" target="_blank">See https://crontab.guru/ for a valid configuration</a>]]>
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

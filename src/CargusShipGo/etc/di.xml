@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Urgent\CargusShipGo\Api\Data\PudoInterface" type="Urgent\CargusShipGo\Model\Pudo" />
+    <preference for="Urgent\CargusShipGo\Api\PudoRepositoryInterface" type="Urgent\CargusShipGo\Model\PudoRepository" />
+
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="Urgent_CargusShipGo_Plugin_Magento_Quote_Model_Cart_ShippingMethodConverter"
+                type="Urgent\CargusShipGo\Plugin\Magento\Quote\Model\Cart\ShippingMethodConverter" sortOrder="30"
+                disabled="false"/>
+    </type>
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="Urgent_CargusShipGo_Plugin_Frontend_Magento_Checkout_Model_ShippingInformationManagement"
+                type="Urgent\CargusShipGo\Plugin\Frontend\Magento\Checkout\Model\ShippingInformationManagement"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\ToOrderAddress">
+        <plugin name="Urgent_CargusShipGo_Plugin_Magento_Quote_Model_Quote_Address_ToOrderAddress"
+                type="Urgent\CargusShipGo\Plugin\Magento\Quote\Model\Quote\Address\ToOrderAddress" sortOrder="99"
+                disabled="false"/>
+    </type>
+</config>

@@ -1,0 +1,61 @@
+<?php
+
+use Urgent\Base\Block\Adminhtml\Order\ReturnCode;
+use Magento\Framework\Escaper;
+
+/** @var ReturnCode $block */
+/** @var Escaper $escaper */
+$returnCode = $block->getReturnCode();
+$returnAwb = $block->getReturnAwb();
+?>
+
+<?php if ($returnCode || $returnAwb): ?>
+    <section class="admin__page-section order-view-shipping-pudo">
+        <div class="admin__page-section-title">
+            <span class="title">Urgent Cargus</span>
+        </div>
+        <div class="admin__page-section-content" style="display: flex; justify-content: space-between;">
+            <?php if ($returnCode): ?>
+            <div class="admin__page-section-item">
+                <div class="admin__page-section-item-title">
+                    <span class="title">Return Code</span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <div>
+                        <a style="cursor: pointer;" onclick="copyReturnCode(this)">
+                            <?= $escaper->escapeHtml($returnCode) ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+            <?php if ($returnAwb): ?>
+            <div class="admin__page-section-item">
+                <div class="admin__page-section-item-title">
+                    <span class="title">Return Awb</span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <div>
+                        <a style="cursor: pointer;" onclick="copyReturnCode(this)">
+                            <?= $escaper->escapeHtml($returnAwb) ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <script>
+        function copyReturnCode(el) {
+            el = jQuery(el);
+            if (navigator.clipboard) {
+                let text = el.html().trim();
+                navigator.clipboard.writeText(text);
+                el.html('<?= __("Copied") ?>');
+                setTimeout(function () {
+                    el.html(text);
+                }, 1500, el)
+            }
+        }
+    </script>
+<?php endif; ?>
