@@ -3,7 +3,6 @@
     "type": "magento2-component",
     "license": "proprietary",
     "description": "Urgent Shipping Modules Suite - Complete Cargus shipping integration for Magento 2",
-    "version": "1.0.0",
     "authors": [
         {
             "name": "Alexandru Marinescu",
