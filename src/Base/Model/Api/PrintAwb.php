@@ -12,7 +12,6 @@ namespace Urgent\Base\Model\Api;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Urgent\Base\Api\Data\AwbInterface;
 use Urgent\Base\Ui\Component\Valid\Listing\Column\Actions;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 /**
  * Class PrintAwb
@@ -76,13 +75,13 @@ class PrintAwb extends Cargus
                 $token = $this->login();
                 $client = $this->getClient();
                 $client->setHeaders(['Authorization' => 'Bearer ' . $token]);
-                $client->setUri($this->_config->getApiUrl() . self::DOCUMENT_AWB);
-                $client->setParameterGet($data);
+                $getParams = http_build_query($data);
+                $client->setUri($this->_config->getApiUrl() . self::DOCUMENT_AWB . '?' . $getParams);
                 $request = $this->doRequest($client);
                 if ($request['success']) {
                     return $request["body"];
                 }
-            } catch (LaminasHttpException | CouldNotSaveException $e) {
+            } catch (\Exception | CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }

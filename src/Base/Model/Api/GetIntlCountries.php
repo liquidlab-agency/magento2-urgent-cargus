@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Urgent\Base\Model\Api;
 
 use Magento\Framework\Exception\CouldNotSaveException;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 class GetIntlCountries extends Cargus
 {
@@ -28,7 +27,7 @@ class GetIntlCountries extends Cargus
                 if ($request['success']) {
                     return $this->_serializer->unserialize($request["body"]);
                 }
-            } catch (LaminasHttpException | CouldNotSaveException $e) {
+            } catch (\Exception | CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }

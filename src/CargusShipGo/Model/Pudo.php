@@ -71,7 +71,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getPudoId(): int
     {
-        return $this->getData(PudoInterface::PUDO_ID);
+        return (int)$this->getData(PudoInterface::PUDO_ID);
     }
 
     /**
@@ -119,7 +119,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getLocationId(): int
     {
-        return $this->getData(PudoInterface::LOCATION_ID);
+        return (int)$this->getData(PudoInterface::LOCATION_ID);
     }
 
     /**
@@ -167,7 +167,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getCityId(): int
     {
-        return $this->getData(PudoInterface::CITY_ID);
+        return (int)$this->getData(PudoInterface::CITY_ID);
     }
 
     /**
@@ -199,7 +199,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getStreetId(): int
     {
-        return $this->getData(PudoInterface::STREET_ID);
+        return (int)$this->getData(PudoInterface::STREET_ID);
     }
 
     /**
@@ -231,7 +231,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getZoneId(): int
     {
-        return $this->getData(PudoInterface::ZONE_ID);
+        return (int)$this->getData(PudoInterface::ZONE_ID);
     }
 
     /**
@@ -407,7 +407,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getPointType(): int
     {
-        return $this->getData(PudoInterface::POINT_TYPE);
+        return (int)$this->getData(PudoInterface::POINT_TYPE);
     }
 
     /**
@@ -679,7 +679,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getServiceCod(): int
     {
-        return $this->getData(PudoInterface::SERVICE_COD);
+        return (int)$this->getData(PudoInterface::SERVICE_COD);
     }
 
     /**
@@ -695,7 +695,7 @@ class Pudo extends AbstractModel implements PudoInterface, IdentityInterface
      */
     public function getPaymentType(): int
     {
-        return $this->getData(PudoInterface::PAYMENT_TYPE);
+        return (int)$this->getData(PudoInterface::PAYMENT_TYPE);
     }
 
     /**

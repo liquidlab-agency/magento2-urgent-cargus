@@ -11,7 +11,6 @@ namespace Urgent\Base\Model\Api\Nomenclature;
 
 use Magento\Framework\Exception\CouldNotSaveException;
 use Urgent\Base\Model\Api\Cargus;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 /**
  * Class Country
@@ -40,7 +39,7 @@ class Country extends Cargus
                 if ($request['success']) {
                     return $this->_serializer->unserialize($request["body"]);
                 }
-            } catch (LaminasHttpException|CouldNotSaveException $e) {
+            } catch (\Exception|CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }

@@ -9,9 +9,7 @@ declare(strict_types=1);
 
 namespace Urgent\CargusShipGo\Model\Api;
 
-use Magento\Framework\HTTP\LaminasClient;
 use Urgent\Base\Model\Api\Cargus;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 /**
  * Class GetPudo
@@ -30,16 +28,15 @@ class GetPudo extends Cargus
     public function execute(): array
     {
         if ($this->_config->getApiIsActive()) {
-            /** @var LaminasClient $client */
             $client = $this->getClient();
             try {
-                $client->setHeaders(['Content-Type' => null]);
+                $client->setHeaders('Content-Type', null);
                 $client->setUri($this->_config->getApiUrl() . self::PUDO);
                 $request = $this->doRequest($client);
                 if ($request['success']) {
                     return $this->_serializer->unserialize($request["body"]);
                 }
-            } catch (LaminasHttpException $e) {
+            } catch (\Exception $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }

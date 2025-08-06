@@ -100,9 +100,11 @@ class PrepareData
                 /** @var Quote $quote */
                 $quote = $this->_quoteRepository->get($quoteId);
                 $quoteShippingAddress = $quote->getShippingAddress();
+                $regionId = $quoteShippingAddress->getRegionId() ?? null;
+                $region = $quoteShippingAddress->getRegion() ?? null;
                 $toCounty = $this->getCargusCounty(
-                    (int)$quoteShippingAddress->getRegionId(),
-                    $quoteShippingAddress->getRegion()
+                    $regionId,
+                    $region
                 );
                 $toCity = null;
                 if ($toCounty !== null && $toCounty->getId()) {

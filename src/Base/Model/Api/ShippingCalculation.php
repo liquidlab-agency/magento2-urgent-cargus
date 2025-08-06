@@ -12,7 +12,6 @@ namespace Urgent\Base\Model\Api;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Filesystem\DirectoryList;
-use Magento\Framework\HTTP\LaminasClientFactory;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Urgent\Base\Api\Data\TokenInterfaceFactory;
@@ -22,8 +21,10 @@ use Urgent\Base\Model\Config\Config;
 use Urgent\Base\Model\Helper\PrepareData;
 use Magento\Store\Model\StoreManagerInterface;
 use Urgent\Base\Model\ResourceModel\Token\Collection as TokenCollection;
-use Laminas\Http\Request;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
+use Magento\Framework\HTTP\AsyncClient\Request;
+use Magento\Framework\App\ProductMetadata;
+use Magento\Analytics\Model\Connector\Http\Client\Curl;
+use Magento\Framework\DataObjectFactory;
 
 /**
  * Class ShippingCalculation
@@ -47,7 +48,6 @@ class ShippingCalculation extends Cargus
      *
      * @param Logger $logger
      * @param Config $config
-     * @param LaminasClientFactory $laminasClientFactory
      * @param TokenCollection $tokenCollection
      * @param TimezoneInterface $timezone
      * @param TokenInterfaceFactory $tokenFactory
@@ -57,11 +57,13 @@ class ShippingCalculation extends Cargus
      * @param EncryptorInterface $encryptor
      * @param PrepareData $prepareData
      * @param StoreManagerInterface $storeManager
+     * @param ProductMetadata $productMetadata
+     * @param Curl $curl
+     * @param DataObjectFactory $dataObjectFactory
      */
     public function __construct(
         Logger $logger,
         Config $config,
-        LaminasClientFactory $laminasClientFactory,
         TokenCollection $tokenCollection,
         TimezoneInterface $timezone,
         TokenInterfaceFactory $tokenFactory,
@@ -70,21 +72,26 @@ class ShippingCalculation extends Cargus
         DirectoryList $directoryList,
         EncryptorInterface $encryptor,
         PrepareData $prepareData,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        ProductMetadata $productMetadata,
+        Curl $curl,
+        DataObjectFactory $dataObjectFactory
     ) {
         $this->_prepareData = $prepareData;
         $this->storeManager = $storeManager;
         parent::__construct(
             $logger,
             $config,
-            $laminasClientFactory,
             $tokenCollection,
             $timezone,
             $tokenFactory,
             $tokenRepository,
             $serializer,
             $directoryList,
-            $encryptor
+            $encryptor,
+            $productMetadata,
+            $curl,
+            $dataObjectFactory
         );
     }
 
@@ -112,7 +119,6 @@ class ShippingCalculation extends Cargus
             if (count($data) === 0) {
                 return [];
             }
-            $data = $this->_serializer->serialize($data);
             $client = $this->getClient(Request::METHOD_POST);
             try {
                 $token = $this->login();
@@ -126,15 +132,15 @@ class ShippingCalculation extends Cargus
                     $apiUrl = $this->_config->getApiUrl() . self::SHIPPING_CALCULATION;
                 }
                 $client->setUri($apiUrl);
-                $client->setRawBody($data);
+                $client->setParameterPost($data);
                 $request = $this->doRequest($client);
                 if ($this->_config->getDebugLogger()) {
-                    $this->_logger->info('Shipping Calculation: ' . $data);
+                    $this->_logger->info('Shipping Calculation: ' . $this->_serializer->serialize($data));
                 }
                 if ($request['success']) {
                     return $this->_serializer->unserialize($request["body"]);
                 }
-            } catch (LaminasHttpException | CouldNotSaveException $e) {
+            } catch (\Exception | CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical('Shipping Calculation: ' . $e->getMessage());
                 }

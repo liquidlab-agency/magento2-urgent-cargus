@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Urgent\Base\Model\Api;
 
+use Magento\Framework\DataObject;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Filesystem\DirectoryList;
@@ -19,12 +20,12 @@ use Urgent\Base\Api\Data\TokenInterfaceFactory;
 use Urgent\Base\Api\TokenRepositoryInterface;
 use Urgent\Base\Logger\Logger;
 use Urgent\Base\Model\ResourceModel\Token\Collection as TokenCollection;
-use Laminas\Http\Response;
-use Laminas\Http\Request;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
-use Magento\Framework\HTTP\LaminasClient;
-use Magento\Framework\HTTP\LaminasClientFactory;
+use Urgent\Base\Model\Config\Response;
 use Urgent\Base\Model\Config\Config;
+use Magento\Framework\HTTP\AsyncClient\Request;
+use Magento\Framework\App\ProductMetadata;
+use Magento\Analytics\Model\Connector\Http\Client\Curl;
+use Magento\Framework\DataObjectFactory;
 
 /**
  * Class Cargus
@@ -39,8 +40,6 @@ abstract class Cargus
     protected Logger $_logger;
     /** @var Config $_config */
     protected Config $_config;
-    /** @var LaminasClientFactory $_laminasClientFactory */
-    protected LaminasClientFactory $_laminasClientFactory;
     /** @var TokenCollection $_tokenCollection */
     private TokenCollection $_tokenCollection;
     /** @var TimezoneInterface $_timezone */
@@ -55,13 +54,15 @@ abstract class Cargus
     protected DirectoryList $_directoryList;
     /** @var EncryptorInterface $_encryptor */
     protected EncryptorInterface $_encryptor;
+    private ProductMetadata $productMetadata;
+    private Curl $curl;
+    private DataObjectFactory $dataObjectFactory;
 
     /**
      * Constructor
      *
      * @param Logger $logger
      * @param Config $config
-     * @param LaminasClientFactory $laminasClientFactory
      * @param TokenCollection $tokenCollection
      * @param TimezoneInterface $timezone
      * @param TokenInterfaceFactory $tokenFactory
@@ -69,22 +70,27 @@ abstract class Cargus
      * @param SerializerInterface $serializer
      * @param DirectoryList $directoryList
      * @param EncryptorInterface $encryptor
+     * @param ProductMetadata $productMetadata
+     * @param Curl $curl
+     * @param DataObjectFactory $dataObjectFactory
      */
     public function __construct(
         Logger                   $logger,
         Config                   $config,
-        LaminasClientFactory     $laminasClientFactory,
         TokenCollection          $tokenCollection,
         TimezoneInterface        $timezone,
         TokenInterfaceFactory    $tokenFactory,
         TokenRepositoryInterface $tokenRepository,
         SerializerInterface      $serializer,
         DirectoryList            $directoryList,
-        EncryptorInterface       $encryptor
-    ) {
+        EncryptorInterface       $encryptor,
+        ProductMetadata          $productMetadata,
+        Curl                     $curl,
+        DataObjectFactory        $dataObjectFactory
+    )
+    {
         $this->_logger = $logger;
         $this->_config = $config;
-        $this->_laminasClientFactory = $laminasClientFactory;
         $this->_tokenCollection = $tokenCollection;
         $this->_timezone = $timezone;
         $this->_tokenFactory = $tokenFactory;
@@ -92,6 +98,9 @@ abstract class Cargus
         $this->_serializer = $serializer;
         $this->_directoryList = $directoryList;
         $this->_encryptor = $encryptor;
+        $this->productMetadata = $productMetadata;
+        $this->curl = $curl;
+        $this->dataObjectFactory = $dataObjectFactory;
     }
 
     /**
@@ -99,28 +108,36 @@ abstract class Cargus
      *
      * @param string $method
      *
-     * @return LaminasClient
+     * @return DataObject
      */
-    protected function getClient(string $method = Request::METHOD_GET): LaminasClient
+    protected function getClient(string $method = Request::METHOD_GET): DataObject
     {
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Ocp-Apim-Subscription-Key' => $this->_config->getApiKey(),
-            'Path' => $this->getVersionMagento()
-        ];
-        $client = $this->_laminasClientFactory->create();
+        $headers = $this->getDefaultHeaders();
+        $client = $this->dataObjectFactory->create();
         try {
             $client->setOptions([
                 'timeout' => $this->_config->getApiTimeout(),
             ]);
             $client->setHeaders($headers);
             $client->setMethod($method);
-        } catch (LaminasHttpException $e) {
+        } catch (\Exception $e) {
             if ($this->_config->getDebugLogger()) {
                 $this->_logger->critical($e->getMessage());
             }
         }
         return $client;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getDefaultHeaders(): array
+    {
+        return [
+            'Ocp-Apim-Subscription-Key: ' . $this->_config->getApiKey(),
+            'Path: ' . $this->getVersionMagento(),
+            'Content-Type: application/json'
+        ];
     }
 
     /**
@@ -148,15 +165,14 @@ abstract class Cargus
             }
         }
 
-        /** @var LaminasClient $client */
+        /** @var DataObject $client */
         $client = $this->getClient(Request::METHOD_POST);
         try {
             $client->setUri($this->_config->getApiUrl() . self::LOGIN);
-            $postData = [
+            $client->setParameterPost([
                 'UserName' => $this->_config->getApiUsername(),
                 'Password' => $this->_encryptor->decrypt($this->_config->getApiPassword()),
-            ];
-            $client->setRawBody($this->_serializer->serialize($postData));
+            ]);
             $request = $this->doRequest($client);
             if ($request['success']) {
                 $token = $this->_tokenFactory->create();
@@ -166,7 +182,7 @@ abstract class Cargus
                 $this->_tokenRepository->save($token);
                 return $token->getToken();
             }
-        } catch (LaminasHttpException $e) {
+        } catch (\Exception $e) {
             if ($this->_config->getDebugLogger()) {
                 $this->_logger->critical($e->getMessage());
             }
@@ -177,11 +193,11 @@ abstract class Cargus
     /**
      * Method doRequest
      *
-     * @param LaminasClient $client
+     * @param DataObject $client
      *
      * @return array
      */
-    protected function doRequest(LaminasClient $client): array
+    protected function doRequest(DataObject $client): array
     {
         $result = [
             'success' => true,
@@ -195,12 +211,27 @@ abstract class Cargus
         }
 
         try {
-            $response = $client->send();
+            $defaultHeaders = $this->getDefaultHeaders();
+            $headers = $client->getHeaders();
+            foreach ($headers as $key => $value) {
+                $headerValue = $key . ': ' . $value;
+                if (!in_array($headerValue, $defaultHeaders)) {
+                    $defaultHeaders[] = $headerValue;
+                }
+            }
+
+            $response = $this->curl->request(
+                $client->getMethod(),
+                $client->getUri(),
+                $client->getParameterPost() ?? [],
+                $defaultHeaders
+            );
+
             if ($this->_config->getDebugLogger()) {
                 $this->_logger->info($client->getUri(true));
             }
             $this->checkResponse($response, $result);
-        } catch (LaminasHttpException $e) {
+        } catch (\Exception $e) {
             if ($this->_config->getDebugLogger()) {
                 $this->_logger->critical($e->getMessage());
             }
@@ -214,13 +245,13 @@ abstract class Cargus
     /**
      * Method checkResponse
      *
-     * @param Response $response
+     * @param $response
      * @param array $result
      *
      * @return void
-     * @throws LaminasHttpException
+     * @throws \Exception
      */
-    private function checkResponse(Response $response, array &$result): void
+    private function checkResponse($response, array &$result): void
     {
         if ($response->getStatusCode() === Response::STATUS_CODE_200) {
             $result['body'] = $response->getBody();
@@ -230,7 +261,7 @@ abstract class Cargus
         } else {
             $throwMsg = 'Request Status: ' . $response->getStatusCode();
             $throwMsg .= ' Body: ' . $response->getBody();
-            throw new LaminasHttpException($throwMsg);
+            throw new \Exception($throwMsg);
         }
     }
 
@@ -242,17 +273,9 @@ abstract class Cargus
     private function getVersionMagento(): string
     {
         // Version must have maxim 5 characters.
-        $rootDir = $this->_directoryList->getRoot();
-        $filePath = $rootDir . DIRECTORY_SEPARATOR . 'composer.json';
-        // phpcs:disable Magento2.Functions.DiscouragedFunction.Discouraged
-        if (file_exists($filePath)) {
-            $composer = $this->_serializer->unserialize(file_get_contents($filePath));
-            // phpcs:enable Magento2.Functions.DiscouragedFunction.Discouraged
-            if (isset($composer['version'])) {
-                return 'M' . substr(str_replace(['.', '-'], '', trim($composer['version'])), 0, 4);
-            }
-        }
-        return 'MNVF'; //Magento no version found
+        return 'M' . substr(
+                str_replace('.', '', $this->productMetadata->getVersion()),
+                0, 4);
     }
 
     /**

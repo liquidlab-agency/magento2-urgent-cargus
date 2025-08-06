@@ -10,9 +10,8 @@ declare(strict_types=1);
 namespace Urgent\Base\Model\Api;
 
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\HTTP\AsyncClient\Request;
 use Urgent\Base\Api\Data\PickupInterface;
-use Laminas\Http\Request;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 /**
  * Class SendOrder
@@ -50,19 +49,18 @@ class SendOrder extends Cargus
                 $token = $this->login();
                 $client = $this->getClient(Request::METHOD_PUT);
                 $client->setHeaders(['Authorization' => 'Bearer ' . $token]);
-                $client->setUri($this->_config->getApiUrl() . self::SEND_ORDER);
-                $client->setParameterGet([
+                $getParams = http_build_query([
                     'locationId' => $this->_pickupData->getLocationId(),
                     'PickupStartDate' => $this->_pickupData->getStartDate(),
                     'PickupEndDate' => $this->_pickupData->getEndDate(),
                     'action' => $this->_pickupData->getStatus()
                 ]);
-
+                $client->setUri($this->_config->getApiUrl() . self::SEND_ORDER . '?' . $getParams);
                 $request = $this->doRequest($client);
                 if ($request['success']) {
                     return (bool)$request["body"];
                 }
-            } catch (LaminasHttpException | CouldNotSaveException $e) {
+            } catch (\Exception | CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }

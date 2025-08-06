@@ -11,7 +11,6 @@ namespace Urgent\Base\Model\Api\Nomenclature;
 
 use Magento\Framework\Exception\CouldNotSaveException;
 use Urgent\Base\Model\Api\Cargus;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 /**
  * Class City
@@ -40,16 +39,16 @@ class City extends Cargus
             try {
                 $token = $this->login();
                 $client->setHeaders(['Authorization' => 'Bearer ' . $token]);
-                $client->setUri($this->_config->getApiUrl() . self::CITIES);
-                $client->setParameterGet([
+                $getParams = http_build_query([
                     'countryId' => $this->_countryId,
                     'countyId' => $this->_countyId
                 ]);
+                $client->setUri($this->_config->getApiUrl() . self::CITIES . '?' . $getParams);
                 $request = $this->doRequest($client);
                 if ($request['success']) {
                     return $this->_serializer->unserialize($request["body"]);
                 }
-            } catch (LaminasHttpException|CouldNotSaveException $e) {
+            } catch (\Exception|CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }

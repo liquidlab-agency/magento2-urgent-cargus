@@ -11,9 +11,7 @@ namespace Urgent\Base\Model\Api;
 
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Filesystem\DirectoryList;
-use Magento\Framework\HTTP\LaminasClientFactory;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Urgent\Base\Api\Data\TokenInterfaceFactory;
@@ -24,8 +22,10 @@ use Urgent\Base\Model\Config\Config;
 use Urgent\Base\Model\Helper\IntlCountryId;
 use Magento\Sales\Api\Data\OrderInterface;
 use Urgent\Base\Model\ResourceModel\Token\Collection as TokenCollection;
-use Laminas\Http\Request;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
+use Magento\Framework\HTTP\AsyncClient\Request;
+use Magento\Framework\App\ProductMetadata;
+use Magento\Analytics\Model\Connector\Http\Client\Curl;
+use Magento\Framework\DataObjectFactory;
 
 /**
  * Class CreateAwb
@@ -53,7 +53,6 @@ class CreateAwb extends Cargus
      *
      * @param Logger $logger
      * @param Config $config
-     * @param LaminasClientFactory $laminasClientFactory
      * @param TokenCollection $tokenCollection
      * @param TimezoneInterface $timezone
      * @param TokenInterfaceFactory $tokenFactory
@@ -63,11 +62,13 @@ class CreateAwb extends Cargus
      * @param EncryptorInterface $encryptor
      * @param IntlCountryId $intlCountryId
      * @param OrderInterface $order
+     * @param ProductMetadata $productMetadata
+     * @param Curl $curl
+     * @param DataObjectFactory $dataObjectFactory
      */
     public function __construct(
         Logger $logger,
         Config $config,
-        LaminasClientFactory $laminasClientFactory,
         TokenCollection $tokenCollection,
         TimezoneInterface $timezone,
         TokenInterfaceFactory $tokenFactory,
@@ -76,21 +77,26 @@ class CreateAwb extends Cargus
         DirectoryList $directoryList,
         EncryptorInterface $encryptor,
         IntlCountryId $intlCountryId,
-        OrderInterface $order
+        OrderInterface $order,
+        ProductMetadata $productMetadata,
+        Curl $curl,
+        DataObjectFactory $dataObjectFactory
     ) {
         $this->intlCountryId = $intlCountryId;
         $this->order = $order;
         parent::__construct(
             $logger,
             $config,
-            $laminasClientFactory,
             $tokenCollection,
             $timezone,
             $tokenFactory,
             $tokenRepository,
             $serializer,
             $directoryList,
-            $encryptor
+            $encryptor,
+            $productMetadata,
+            $curl,
+            $dataObjectFactory
         );
     }
 
@@ -128,10 +134,10 @@ class CreateAwb extends Cargus
                         return [];
                     }
                     $client->setUri($this->_config->getApiUrlV4() . self::CREATE_AWB_V4);
-                    $client->setRawBody($this->getExternalAwbData((int)$intlCountryId));
+                    $client->setParameterPost($this->getExternalAwbData((int)$intlCountryId));
                 } else {
                     $client->setUri($this->_config->getApiUrl() . self::CREATE_AWB);
-                    $client->setRawBody($this->getAwbData());
+                    $client->setParameterPost($this->getAwbData());
                 }
                 $request = $this->doRequest($client);
                 if ($request['success']) {
@@ -146,7 +152,7 @@ class CreateAwb extends Cargus
                     return $this->_serializer->unserialize($request["body"]);
                 }
                 return $request;
-            } catch (LaminasHttpException|CouldNotSaveException $e) {
+            } catch (\Exception|CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }
@@ -372,19 +378,19 @@ class CreateAwb extends Cargus
             //remove the outer quotes from the body value
             $barcode = trim($barcode, '"');
         }
-        $client = $this->getClient(Request::METHOD_GET);
+        $client = $this->getClient();
         try {
             $token = $this->login();
             $client->setHeaders(['Authorization' => 'Bearer ' . $token]);
-            $client->setUri($this->_config->getApiUrl() . self::AWB_DETAILS);
-            $client->setParameterGet(['barCode' => $barcode]);
+            $getParams = http_build_query(['barCode' => $barcode]);
+            $client->setUri($this->_config->getApiUrl() . self::AWB_DETAILS . '?' . $getParams);
             $request = $this->doRequest($client);
             if ($request['success']) {
                 if (!empty($request["body"])) {
                     return $this->_serializer->unserialize($request["body"]);
                 }
             }
-        } catch (LaminasHttpException|CouldNotSaveException $e) {
+        } catch (\Exception|CouldNotSaveException $e) {
             if ($this->_config->getDebugLogger()) {
                 $this->_logger->critical($e->getMessage());
             }

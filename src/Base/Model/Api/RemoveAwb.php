@@ -11,8 +11,6 @@ namespace Urgent\Base\Model\Api;
 
 use Magento\Framework\Exception\CouldNotSaveException;
 use Urgent\Base\Api\Data\AwbInterface;
-use Laminas\Http\Request;
-use Laminas\Http\Exception\RuntimeException as LaminasHttpException;
 
 /**
  * Class RemoveAwb
@@ -56,7 +54,7 @@ class RemoveAwb extends Cargus
                 if ($request['success']) {
                     return (bool)$request["body"];
                 }
-            } catch (LaminasHttpException | CouldNotSaveException $e) {
+            } catch (\Exception | CouldNotSaveException $e) {
                 if ($this->_config->getDebugLogger()) {
                     $this->_logger->critical($e->getMessage());
                 }
