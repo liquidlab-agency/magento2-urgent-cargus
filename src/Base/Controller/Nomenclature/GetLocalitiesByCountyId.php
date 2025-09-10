@@ -70,6 +70,7 @@ class GetLocalitiesByCountyId implements HttpGetActionInterface
             'error' => false,
             'message' => ''
         ];
+
         if ($countyId > 0) {
             try {
                 $county = $this->_countyRepository->getById($countyId);
@@ -80,22 +81,22 @@ class GetLocalitiesByCountyId implements HttpGetActionInterface
                         return $result->setData($response);
                     }
                     $response['error'] = true;
-                    $response['message'] = __('No localities where found!');
+                    $response['message'] = __('No localities were found!');
                     return $result->setData($response);
                 }
             } catch (LocalizedException|NoSuchEntityException $e) {
                 $response['error'] = true;
-                $response['message'] = __('Something goes wrong in the process to get localities from cargus!');
+                $response['message'] = __('Something went wrong in the process to get localities from Cargus!');
                 return $result->setData($response);
             }
 
             $response['error'] = true;
-            $response['message'] = __('No county was found with %1 name!', $countyName);
+            $response['message'] = __('No county was found with ID %1!', $countyId);
             return $result->setData($response);
         }
 
         $response['error'] = true;
-        $response['message'] = __('County name is empty!');
+        $response['message'] = __('County ID is missing or invalid!');
         return $result->setData($response);
     }
 }
