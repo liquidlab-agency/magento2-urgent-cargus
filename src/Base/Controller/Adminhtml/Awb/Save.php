@@ -34,7 +34,7 @@ use Urgent\Base\Model\CityRepository;
 class Save extends Action implements HttpPostActionInterface
 {
     /** @var string */
-    public const ADMIN_RESOURCE = 'Urgent_Base::awb_save';
+    public const ADMIN_RESOURCE = 'Urgent_Base::awb_edit';
 
     /** @var AwbRepositoryInterface $_awbRepository */
     protected AwbRepositoryInterface $_awbRepository;
