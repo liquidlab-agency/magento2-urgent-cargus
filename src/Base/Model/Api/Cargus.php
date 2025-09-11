@@ -220,16 +220,10 @@ abstract class Cargus
                 }
             }
 
-            // Ensure the parameter post is an array as expected by the Analytics Curl client
-            $parameterPost = $client->getParameterPost() ?? [];
-            if (is_string($parameterPost)) {
-                $parameterPost = $this->_serializer->unserialize($parameterPost);
-            }
-
             $response = $this->curl->request(
                 $client->getMethod(),
                 $client->getUri(),
-                $parameterPost,
+                $client->getParameterPost() ?? [],
                 $defaultHeaders
             );
 

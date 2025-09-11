@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/urgent-cargus/localities/by-county-id/:countyId" method="GET">
+        <service class="Urgent\Base\Api\LocalityInterface" method="getLocalitiesByCountyId"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/urgent-cargus/localities/by-county-name" method="POST">
+        <service class="Urgent\Base\Api\LocalityInterface" method="getLocalitiesByCountyNamePost"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

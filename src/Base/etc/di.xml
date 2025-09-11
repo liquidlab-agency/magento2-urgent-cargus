@@ -13,6 +13,7 @@
     <preference for="Urgent\Base\Api\CountryRepositoryInterface" type="Urgent\Base\Model\CountryRepository"/>
     <preference for="Urgent\Base\Api\CountyRepositoryInterface" type="Urgent\Base\Model\CountyRepository"/>
     <preference for="Urgent\Base\Api\CityRepositoryInterface" type="Urgent\Base\Model\CityRepository"/>
+    <preference for="Urgent\Base\Api\LocalityInterface" type="Urgent\Base\Model\Api\LocalityManagement"/>
 
     <type name="Urgent\Base\Logger\Handler">
         <arguments>

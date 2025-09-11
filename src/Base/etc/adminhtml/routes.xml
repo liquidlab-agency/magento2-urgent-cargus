@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
         <route id="urgentcargus" frontName="urgentcargus">
-            <module name="Urgent_Base"/>
+            <module before="Magento_Backend" name="Urgent_Base"/>
         </route>
     </router>
 </config>
