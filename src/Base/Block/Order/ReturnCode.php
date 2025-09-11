@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace Urgent\Base\Block\Order;
 
-use Endroid\QrCode\QrCode;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Urgent\Base\Api\AwbRepositoryInterface;
+use Urgent\Base\Model\QrCodeFactory;
 
 /**
  * Class ReturnCode
@@ -28,8 +28,8 @@ class ReturnCode extends Template
     private Registry $_registry;
     /** @var AwbRepositoryInterface $_awbRepository */
     private AwbRepositoryInterface $_awbRepository;
-    /** @var QrCode $_qrCode */
-    private QrCode $_qrCode;
+    /** @var QrCodeFactory $_qrCodeFactory */
+    private QrCodeFactory $_qrCodeFactory;
 
     /**
      * Constructor
@@ -37,19 +37,19 @@ class ReturnCode extends Template
      * @param Context $context
      * @param Registry $registry
      * @param AwbRepositoryInterface $awbRepository
-     * @param QrCode $qrCode
+     * @param QrCodeFactory $qrCodeFactory
      * @param array $data
      */
     public function __construct(
         Template\Context       $context,
         Registry               $registry,
         AwbRepositoryInterface $awbRepository,
-        QrCode                 $qrCode,
+        QrCodeFactory          $qrCodeFactory,
         array                  $data = []
     ) {
         $this->_registry = $registry;
         $this->_awbRepository = $awbRepository;
-        $this->_qrCode = $qrCode;
+        $this->_qrCodeFactory = $qrCodeFactory;
         parent::__construct($context, $data);
     }
 
@@ -87,13 +87,16 @@ class ReturnCode extends Template
     public function getQrReturnCode(): string
     {
         if ($this->_returnCode) {
-            $qrCode = $this->_qrCode;
-            $qrCode->setWriterByName('svg');
-            $qrCode->setText($this->_returnCode);
-            $qrCode->setLabel($this->_returnCode);
-            $qrCode->setSize(200);
+            // Use the factory to create a QrCode with the return code data
+            // and appropriate configuration
+            $qrCode = $this->_qrCodeFactory->create(
+                $this->_returnCode,  // data parameter (required)
+                200,                // size parameter
+                $this->_returnCode   // label parameter
+            );
 
-            return $qrCode->writeString();
+            // Use the factory to write the QR code to SVG string
+            return $this->_qrCodeFactory->writeString($qrCode);
         }
         return '';
     }
