@@ -14,6 +14,7 @@
                 <service>1</service>
                 <consumer_return>0</consumer_return>
                 <consumer_return_days>0</consumer_return_days>
+                <awb_format>0</awb_format>
             </general>
             <default_values>
                 <length>0</length>

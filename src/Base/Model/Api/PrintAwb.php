@@ -23,6 +23,7 @@ class PrintAwb extends Cargus
     private const DOCUMENT_AWB = 'AwbDocuments';
     private const TYPE_PDF = 'PDF';
     private const FORMAT_A4 = 0;
+    private const FORMAT_A6 = 1;
 
     /** @var AwbInterface $_awb */
     private AwbInterface $_awb;
@@ -65,7 +66,7 @@ class PrintAwb extends Cargus
                 $data = [
                     'barCodes' => $this->_awb->getAwbNo(),
                     'type' => self::TYPE_PDF,
-                    'format' => self::FORMAT_A4,
+                    'format' => $this->_config->getGeneralAwbFormat(),
                 ];
 
                 if ($this->_config->getGeneralConsumerReturn() !== 0) {

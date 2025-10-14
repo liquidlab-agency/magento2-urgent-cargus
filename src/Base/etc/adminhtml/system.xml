@@ -81,6 +81,11 @@
                         <field id="consumer_return" separator=",">1,2</field>
                     </depends>
                 </field>
+                <field id="awb_format" type="select" sortOrder="120" showInWebsite="1" showInStore="1" showInDefault="1" translate="label" canRestore="1">
+                    <label>AWB Print Format</label>
+                    <source_model>Urgent\Base\Model\Config\Source\AwbFormat</source_model>
+                    <comment>Select the format for printing AWB documents (A4 or A6)</comment>
+                </field>
             </group>
             <group id="location" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1"
                    translate="comment label">

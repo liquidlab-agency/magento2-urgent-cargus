@@ -35,6 +35,7 @@ class Config
     public const GENERAL_PRICE_TABLE = 'price_table';
     public const GENERAL_CONSUMER_RETURN = 'consumer_return';
     public const GENERAL_CONSUMER_RETURN_DAYS = 'consumer_return_days';
+    public const GENERAL_AWB_FORMAT = 'awb_format';
 
     /** Location */
     public const CONFIG_LOCATION = 'location';
@@ -229,6 +230,17 @@ class Config
     {
         $general = $this->getGeneral();
         return (int)$general[self::GENERAL_CONSUMER_RETURN_DAYS];
+    }
+
+    /**
+     * Method getGeneralAwbFormat
+     *
+     * @return int
+     */
+    public function getGeneralAwbFormat(): int
+    {
+        $general = $this->getGeneral();
+        return isset($general[self::GENERAL_AWB_FORMAT]) ? (int)$general[self::GENERAL_AWB_FORMAT] : 0;
     }
 
     /**
