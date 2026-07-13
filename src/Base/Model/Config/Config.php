@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Urgent\Base\Model\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -73,16 +74,21 @@ class Config
     private $_configs;
     /** @var array $_configsNomenclature */
     private $_configsNomenclature;
+    /** @var EncryptorInterface $_encryptor */
+    private EncryptorInterface $_encryptor;
 
     /**
      * Constructor
      *
      * @param ScopeConfigInterface $scopeConfig
+     * @param EncryptorInterface $encryptor
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        EncryptorInterface $encryptor
     ) {
         $this->_scopeConfig = $scopeConfig;
+        $this->_encryptor = $encryptor;
         $this->_configs = $this->_scopeConfig->getValue(self::CONFIG_PATH_GENERAL);
         $this->_configsNomenclature = $this->_scopeConfig->getValue(self::CONFIG_PATH_NOMENCLATURE);
     }
@@ -380,7 +386,28 @@ class Config
     public function getApiKey(): string
     {
         $api = $this->getApi();
-        return $api[self::API_KEY] ?? '';
+        $stored = (string)($api[self::API_KEY] ?? '');
+        if ($stored === '') {
+            return '';
+        }
+
+        // SEC-15: the key is stored encrypted (Encrypted backend model on the system.xml
+        // field). ScopeConfig returns the RAW value, so decrypt it here. A legacy plaintext
+        // key (pre-encryption installs) has no "<n>:<n>:" prefix and is returned verbatim so
+        // existing merchants keep authenticating with zero downtime; decrypt() is guarded
+        // because an unsupported cipher version would otherwise throw.
+        if (preg_match('/^\d+:\d+:/', $stored) === 1) {
+            try {
+                $decrypted = $this->_encryptor->decrypt($stored);
+            } catch (\Throwable $e) {
+                $decrypted = '';
+            }
+            if ($decrypted !== '') {
+                return $decrypted;
+            }
+        }
+
+        return $stored;
     }
 
     /**

@@ -12,7 +12,7 @@ namespace Urgent\Base\Controller\Adminhtml\Pickup;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Page;
-use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultInterface;
@@ -27,7 +27,7 @@ use Urgent\Base\Model\Api\SendOrder;
  *
  * Description: ...
  */
-class Cancel extends Action implements HttpGetActionInterface
+class Cancel extends Action implements HttpPostActionInterface
 {
     /** @var string */
     public const ADMIN_RESOURCE = 'Urgent_Base::pickup_cancel';

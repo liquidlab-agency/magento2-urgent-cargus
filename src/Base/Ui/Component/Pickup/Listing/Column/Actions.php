@@ -40,6 +40,8 @@ class Actions extends Column
                             'title' => __('Cancel %1', $item['location_id']),
                             'message' => __('Are you sure you want to cancel this %1 record?', $item['location_id'])
                         ],
+                        // SEC-15: POST with form-key CSRF (actions.js posts via mage/dataPost when set).
+                        'post' => true,
                     ];
                 }
             }

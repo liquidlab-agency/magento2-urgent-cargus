@@ -52,12 +52,19 @@ class Add extends View
         if ($this->_isAllowedAction('Urgent_Base::urgentcargus_mass_action_add') &&
             !$order->isCanceled() &&
             $this->awbRepository->getByIncrementId($order->getIncrementId()) === null) {
+            // SEC-15: POST with form-key CSRF (was a GET setLocation). deleteConfirm(msg, url, {data})
+            // is Magento's core confirm+POST helper (mage/dataPost). Also pass order_id, which the
+            // former URL omitted entirely — the controller reads getParam('order_id').
+            $confirmMessage = $this->escapeJs(
+                $this->escapeHtml(__('Are you sure you want to add this order to Cargus?'))
+            );
+            $addUrl = $this->getUrl('urgentcargus/order/add', ['order_id' => (int)$order->getEntityId()]);
             $this->addButton(
                 'order_add_cargus',
                 [
                     'label' => __('Add to Cargus'),
                     'id' => 'order-view-add-cargus-button',
-                    'onclick' => 'setLocation(\'' . $this->getUrl('urgentcargus/order/add') . '\')'
+                    'onclick' => 'deleteConfirm(\'' . $confirmMessage . '\', \'' . $addUrl . '\', {data: {}})'
                 ]
             );
         }

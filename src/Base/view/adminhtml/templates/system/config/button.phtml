@@ -4,7 +4,7 @@
 ?>
 <div class="actions">
     <button class="actions" type="button" id="<?= $block->getHtmlId() ?>"
-            onclick="location.href='<?= $escaper->escapeHtml($block->getButtonUrl()) ?>'">
+            data-post="<?= $escaper->escapeHtmlAttr($block->getPostData()) ?>">
         <span><?= $escaper->escapeHtml($block->getButtonLabel()) ?></span>
     </button>
 </div>

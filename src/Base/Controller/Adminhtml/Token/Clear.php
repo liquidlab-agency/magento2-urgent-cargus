@@ -11,7 +11,7 @@ namespace Urgent\Base\Controller\Adminhtml\Token;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Controller\Result\Redirect;
 use Urgent\Base\Api\Data\TokenInterface;
@@ -21,7 +21,7 @@ use Urgent\Base\Api\Data\TokenInterface;
  *
  * Description: ...
  */
-class Clear extends Action implements HttpGetActionInterface
+class Clear extends Action implements HttpPostActionInterface
 {
     /** @var string */
     public const ADMIN_RESOURCE = 'Urgent_Base::config';

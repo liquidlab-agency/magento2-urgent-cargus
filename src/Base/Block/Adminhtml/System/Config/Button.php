@@ -56,4 +56,18 @@ class Button extends Field
 
         return $this->_toHtml();
     }
+
+    /**
+     * SEC-15: JSON payload for the data-post click handler so the button issues a POST with the
+     * admin form key (mage/dataPost). Replaces the former GET location.href, which was CSRF-unsafe.
+     *
+     * @return string
+     */
+    public function getPostData(): string
+    {
+        return (string)json_encode([
+            'action' => $this->getButtonUrl(),
+            'data' => [],
+        ]);
+    }
 }

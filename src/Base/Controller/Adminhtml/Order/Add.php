@@ -11,7 +11,7 @@ namespace Urgent\Base\Controller\Adminhtml\Order;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultInterface;
@@ -24,7 +24,7 @@ use Urgent\Base\Model\AddAwbGrid;
  *
  * Description: ...
  */
-class Add extends Action implements HttpGetActionInterface
+class Add extends Action implements HttpPostActionInterface
 {
     public const ADMIN_RESOURCE = 'Urgent_Base::urgentcargus_mass_action_add';
 
