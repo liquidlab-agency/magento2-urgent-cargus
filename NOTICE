@@ -1,0 +1,33 @@
+magento2-urgent-cargus
+Maintained by LiquidLab — https://github.com/liquidlab-agency
+
+================================================================================
+ATTRIBUTION
+================================================================================
+
+This package is a community-maintained fork of the original
+"Cargus for Magento 2" module:
+
+    Original work:    Copyright (c) Tremend Software Consulting
+    Original author:  Alexandru Marinescu
+    Original source:  https://gitlab.com/cargus/cargus-modules/magento2
+
+The original module is distributed without an explicit software license. All
+rights to the original work remain with its respective copyright holders
+(Tremend Software Consulting / Cargus). LiquidLab does not claim ownership of the
+original code.
+
+LiquidLab maintains this fork independently to keep the module compatible with
+current Magento (2.4.x) and PHP (8.2 / 8.3) versions, and to provide fixes and
+security hardening. Modifications made by LiquidLab are provided on an "as is"
+basis, without warranty of any kind.
+
+================================================================================
+DISCLAIMER
+================================================================================
+
+This project is NOT affiliated with, authorized, maintained, sponsored, or
+endorsed by Cargus (Urgent Cargus S.A.) or by Tremend Software Consulting.
+"Cargus" and any related names or marks are the property of their respective
+owners and are used here only to identify the shipping service that this module
+integrates with.

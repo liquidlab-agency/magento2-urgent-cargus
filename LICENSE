@@ -1,0 +1,23 @@
+All rights reserved.
+
+This repository is a maintained fork. The original module it is based on
+("Cargus for Magento 2", https://gitlab.com/cargus/cargus-modules/magento2) is
+published without an explicit license; all rights to the original work remain with
+its copyright holders, Tremend Software Consulting / Cargus.
+
+LiquidLab does not own the underlying copyright and does not grant, and cannot
+grant, a license to the original work. LiquidLab's own modifications to the code are
+likewise provided without warranty of any kind.
+
+If you intend to use, copy, modify, or redistribute this software, you are
+responsible for obtaining permission from the original copyright holders
+(Tremend Software Consulting / Cargus).
+
+See the NOTICE file for full attribution.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE MAINTAINERS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

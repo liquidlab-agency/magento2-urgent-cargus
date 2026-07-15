@@ -7,7 +7,13 @@
     "authors": [
         {
             "name": "Alexandru Marinescu",
-            "email": "alexandru.marinescu@tremend.com"
+            "email": "alexandru.marinescu@tremend.com",
+            "role": "Original author (Tremend Software Consulting)"
+        },
+        {
+            "name": "LiquidLab",
+            "homepage": "https://github.com/liquidlab-agency",
+            "role": "Maintainer"
         }
     ],
     "minimum-stability": "stable",

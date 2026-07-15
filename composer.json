@@ -2,11 +2,32 @@
     "name": "liquidlab-agency/magento2-urgent-cargus",
     "type": "magento2-component",
     "license": "proprietary",
-    "description": "Urgent Shipping Modules Suite - Complete Cargus shipping integration for Magento 2",
+    "description": "Community-maintained Cargus shipping integration for Magento 2 (metapackage). Fork of the original Cargus/Tremend module, updated for Magento 2.4.x and PHP 8.2/8.3.",
+    "keywords": [
+        "magento2",
+        "magento-2",
+        "cargus",
+        "shipping",
+        "courier",
+        "romania",
+        "awb",
+        "ecommerce"
+    ],
+    "homepage": "https://github.com/liquidlab-agency/magento2-urgent-cargus",
+    "support": {
+        "issues": "https://github.com/liquidlab-agency/magento2-urgent-cargus/issues",
+        "source": "https://github.com/liquidlab-agency/magento2-urgent-cargus"
+    },
     "authors": [
         {
             "name": "Alexandru Marinescu",
-            "email": "alexandru.marinescu@tremend.com"
+            "email": "alexandru.marinescu@tremend.com",
+            "role": "Original author (Tremend Software Consulting)"
+        },
+        {
+            "name": "LiquidLab",
+            "homepage": "https://github.com/liquidlab-agency",
+            "role": "Maintainer"
         }
     ],
     "require": {
