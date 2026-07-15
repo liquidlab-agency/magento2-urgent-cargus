@@ -34,6 +34,9 @@
         "php": "^8.2|^8.3",
         "magento/framework": "^103.0"
     },
+    "suggest": {
+        "liquidlab-agency/hyva-urgent-cargus": "Hyvä Checkout compatibility layer for the Cargus Ship & Go pickup-point selector"
+    },
     "autoload": {
         "files": [
             "src/Base/registration.php",

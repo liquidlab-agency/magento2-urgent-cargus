@@ -79,6 +79,26 @@ Then configure the carriers under **Stores → Configuration → Sales → Shipp
 - PHP `^8.2 | ^8.3`
 - Magento `2.4.x` (`magento/framework: ^103.0`)
 
+## 🧩 Hyvä Checkout compatibility
+
+These modules work with Magento's native (Luma) checkout out of the box. For stores
+running **[Hyvä Checkout](https://www.hyva.io/)**, the Cargus **Ship & Go**
+pickup-point selector is provided by a separate companion package:
+
+- **Package:** [`liquidlab-agency/hyva-urgent-cargus`](https://github.com/liquidlab-agency/hyva-urgent-cargus)
+- **Module:** `Liquidlab_HyvaCargus` — a Magewire-based Hyvä Checkout integration, authored and maintained by LiquidLab
+
+Install it alongside this package:
+
+```bash
+composer require liquidlab-agency/hyva-urgent-cargus
+bin/magento module:enable Liquidlab_HyvaCargus
+bin/magento setup:upgrade
+```
+
+It depends on this package plus `hyva-themes/magento2-hyva-checkout`. Only add it if
+your store uses Hyvä Checkout — native-checkout stores don't need it.
+
 ## 🆘 Support
 
 Report issues at
